@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    @apply dark:bg-trueGray-900;
+  }
+}
+
+:root {
+  /* Your default theme */
+  --background: white;
+  --foreground: black;
+}
+
+
+li a {
+  text-decoration: none;
+  color:#888;
+  
+}
+
+.segmented-control {
+  display: inline-block;
+  border: 1px solid #4155FE;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.segmented-control__item {
+  float: left;
+  list-style-type: none;
+}
+.segmented-control__input {
+  position: absolute;
+  visibility: hidden;
+}
+.segmented-control__label {
+  display: block;
+  padding: 1em 4em;
+  margin: -1px 0;
+  border-left: 1px solid #ddd;
+  text-align: center;  
+  cursor: pointer;
+  font-weight: bold;
+}
+.segmented-control__item:first-child .segmented-control__label {
+  border-left-width: 0;
+}
+.segmented-control__label:hover {
+  background: #fafafa;
+}
+.segmented-control__input:checked + .segmented-control__label {
+  background: #4155FE;
+  color:#fff;
+}
