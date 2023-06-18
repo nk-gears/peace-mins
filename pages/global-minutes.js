@@ -2,9 +2,10 @@ import Head from "next/head";
 import Navbar from "../components/navbar";
 import Image from "next/image"
 import Footer from "../components/footer";
-import Link from "next/link";
+import SectionTitle from "../components/sectionTitle";
 
-const MyPeaceMins = () => {
+
+const GlobalPeaceMins = () => {
   return (
     <>
       <Head>
@@ -35,7 +36,7 @@ const MyPeaceMins = () => {
 </div>
 
 <div className="py-24 flex items-center justify-center bg-white-50 space-x-8">
-<div className="relative w-64 h-64 bg-indigo-100 rounded-full flex justify-center items-center text-center p-5 shadow-xl">
+<div className="relative w-64 h-64 bg-purple-200 rounded-full flex justify-center items-center text-center p-5 shadow-xl">
 <span className="absolute text-8xl left-0 top-0 text-purple-800 ">
 </span>
 <span className="text-5xl text-brandBase"><span>
@@ -49,7 +50,7 @@ const MyPeaceMins = () => {
                       />  
                         
                     </span>951110
-                    <span className="block text-xl text-brandBase text-gray-400">minutes of peace</span>
+                    <span className="block text-xl text-brandBase text-gray-500"> minutes of peace globally</span>
                     
                     </span>
                    
@@ -64,25 +65,11 @@ Thanks for your contribution to spread the peace in and around the globe so far.
 Share this with your friends and relatives.
 
 </p>
-<div id="box" className="m-0 brightness-200 text-center"></div>
 
-<ul className="flex items-center justify-center items-center justify-center flex-1 pt-6 list-none lg:pt-0 lg:flex">
-            
-    
-              <li className="mr-3 nav__item" key={5}>
-                <Link href="/global-minutes" className="inline-block px-4 py-2 text-sm font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800">
-                    Show Global Minutes
-                </Link>
-                
-              </li>
-          </ul>
-
-
-      
       <Footer />
       
     </>
   );
 }
 
-export default MyPeaceMins;
+export default GlobalPeaceMins;
