@@ -16,8 +16,15 @@ export async function addUserMinutes(payload) {
     return response.data;
 }
 
-export async function getGlobalPeaceMinutes(userId) {
+
+export async function getUserPeaceMinutes(userId) {
     const resUrl=`${BASE_URL}/pm5_user_minutes?filter1=user_id,eq,${userId}`;
+    const response = await axios.get(resUrl);
+    return response.data;
+}
+
+export async function getGlobalPeaceMinutes() {
+    const resUrl=`${BASE_URL}/pm5_user_minutes`;
     const response = await axios.get(resUrl);
     return response.data;
 }
@@ -31,6 +38,13 @@ export async function getUserInfoByUnique({userEmail,userMobile}) {
 }
 
 
+
+export async function getDataBQuery({query}) {
+    const mUrl="http://happy-village.org/depo/dapi.php";
+    const resUrl=`${mUrl}`;
+    const response = await axios.post(resUrl,{query});
+    return response.data;
+}
 
 export async function isUserExists({userEmail,userMobile}) {
     //?filter1=user_email,eq,kumar.nirmal.v@gmail.com&filter2=user_mobile,eq,+919283181228

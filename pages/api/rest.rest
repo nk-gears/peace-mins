@@ -26,12 +26,27 @@ Content-Type: application/json
 {"user_id":"1","event_date":123123213,"event_time":"10:30 AM","event_minutes":122,"event_members":12,"createdAt":12123213,"updatedAt":123123}
 
 
+
+### GET Minutes Metrics
+
+GET http://localhost:3000/api/peace-minutes/314213
+Content-Type: application/json
+
+
+
 ### Add Peace minutes ORIG API
 POST http://happy-village.org/depo/api.php/records/pm5_user_minutes
 Content-Type: application/json
 
 {"user_id":"1","event_date":123123213,"event_time":"10:30 AM","event_minutes":122,"event_members":12,"createdAt":12123213,"updatedAt":123123}
 
+
+### RAQ QUERY
+
+POST http://happy-village.org/depo/dapi.php
+Content-Type: application/json
+
+{ "query" : "SELECT * from pm5_users " }
 
 
 ### ORIG API
