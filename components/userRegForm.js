@@ -10,11 +10,26 @@ const UserRegFormComponent = () => {
     mobile: ''
   });
 
+
+  const registerUser = async () => {
+    await fetch('/api/users',
+                {
+                    method:'POST',
+                    body: JSON.stringify( { comment: state }),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+               
+                );
+               
+  }
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // You can perform further actions with the form data here, such as sending it to a server
 
@@ -27,6 +42,7 @@ const UserRegFormComponent = () => {
       email: '',
       mobile: ''
     });
+    await registerUser();
   };
 
   return (
@@ -178,8 +194,7 @@ const UserRegFormComponent = () => {
             required
             className="mr-2"
           />
-          I agree to the terms and conditions
-        </label>
+I agree to share my peace mins daily        </label>
       </div>
 
       <button

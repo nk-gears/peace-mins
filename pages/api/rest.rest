@@ -1,0 +1,42 @@
+
+### Get All users
+POST http://localhost:3000/api/users/add223231
+Content-Type: application/json
+
+
+
+### Add new user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+
+
+### Add new Org user
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{"id":"1222","user_type":2,"user_email":"kumar.nirmal.v@gmail.com","user_fullname":"Nirmal Kumar","user_age":12,"user_mobile":"+919283181228","user_city":"CHENNAI","createdAt":1687154319,"updatedAt":1687154319,"user_active":1,"last_user_seen":0,"user_org_name":"ORG1","user_org_contactName":"ORG NK"}
+
+
+
+### Add Peace minutes
+POST http://localhost:3000/api/peace-minutes
+Content-Type: application/json
+
+{"user_id":"1","event_date":123123213,"event_time":"10:30 AM","event_minutes":122,"event_members":12,"createdAt":12123213,"updatedAt":123123}
+
+
+### Add Peace minutes ORIG API
+POST http://happy-village.org/depo/api.php/records/pm5_user_minutes
+Content-Type: application/json
+
+{"user_id":"1","event_date":123123213,"event_time":"10:30 AM","event_minutes":122,"event_members":12,"createdAt":12123213,"updatedAt":123123}
+
+
+
+### ORIG API
+
+POST http://happy-village.org/depo/api.php/records/pm5_users
+Content-Type: application/json
+
+{"id":"1222","user_type":1,"user_email":"kumar.nirmal.v@gmail.com","user_fullname":"Nirmal Kumar","user_age":12,"user_mobile":"+919283181228","user_city":"CHENNAI","createdAt":1687154319,"updatedAt":1687154319,"user_active":1,"last_user_seen":0,"user_org_name":"","user_org_contactName":""}

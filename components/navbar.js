@@ -31,7 +31,7 @@ const Navbar = () => {
                         className="w-8"
                       />
                     </span>
-                    <span className="my-0 py-0 text-brandBase">5 Mins for Peace<span className="block text-black my-0 py-0 text-xs text-grey-dark m-0 p-0">Meditate - Transform - Everyday</span> </span>
+                    <span className="my-0 py-0 text-brandBase">5 Mins for Peace<span className="block text-black my-0 py-0 text-xs text-grey-dark m-0 p-0">Meditate - Transform your day - Everyday</span> </span>
                     
                   </span>
                 </Link>

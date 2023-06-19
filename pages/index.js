@@ -10,6 +10,9 @@ import Footer from "../components/footer";
 
 
 const Home = () => {
+
+
+  
   return (
     <>
       <Head>

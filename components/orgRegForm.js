@@ -126,7 +126,7 @@ className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
             required
             className="mr-2"
           />
-          I agree to the terms and conditions
+          I agree to share my peace mins daily
         </label>
       </div>
 
