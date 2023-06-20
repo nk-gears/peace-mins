@@ -27,9 +27,10 @@ const Navbar = () => {
 
    {title : "campaign",url:"/campaign"},
    {title : "faq",url:"/faq"},
-   {title : "about Us",url:"/about-us"},
+   {title : "about us",url:"/about-us"},
    {title : "resources",url:"/resources"},
    {title : "my minutes",url:"/my-peace-mins"},
+
 
   
   ];

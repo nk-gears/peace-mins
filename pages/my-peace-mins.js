@@ -18,7 +18,7 @@ const MyPeaceMins = () => {
 
       <Navbar />
 
-      <div
+      {/* <div
         className="inline-flex rounded-md shadow-sm container mx-auto xl:px-0 flex w-full items-center justify-center text-center"
         role="group"
       >
@@ -63,7 +63,7 @@ const MyPeaceMins = () => {
           </svg>
           This Week
         </button>
-      </div>
+      </div> */}
 
       <div className="flex items-center text-center w-full justify-center bg-white-50 pt-4 mt-2">
       <p>Today</p>

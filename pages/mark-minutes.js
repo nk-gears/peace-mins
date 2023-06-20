@@ -14,7 +14,8 @@ const MarkMinutes = () => {
   const [peaceTimeAMPM, setPeaceTimeAMPM] = useState('AM');
   const [todayDate, setTodayDate] = useState(new Date());
   const [mounted, setMounted] = useState(false);
-  const [isRegistered,setIsRegistered]=useState(true);
+  const [isRegistered,setIsRegistered]=useState(false);
+  const [isSubmitted,setIsSubmitted]=useState(false);
   const [userInfo,setUserInfo]=useState(true);
 
   useEffect(() => {setMounted(true);
@@ -34,7 +35,7 @@ const MarkMinutes = () => {
 
   const renderTimeOptions = () => {
     const timeOptions = [];
-    for (let hour = 0; hour <=12; hour++) {
+    for (let hour = 1; hour <=12; hour++) {
       for (let minute = 0; minute < 60; minute += 5) {
         const formattedTime = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
         timeOptions.push(
@@ -43,6 +44,34 @@ const MarkMinutes = () => {
       }
     }
     return timeOptions;
+  };
+
+
+
+  const savePeaceMinutes = async () => {
+    const actualData = {
+      user_id:userInfo.user_id,
+      event_date:Date. now(),
+      event_time:formData.peaceTime,
+      event_minutes:formData.memberCount * 5,
+      event_members:formData.memberCount
+
+    };
+    return fetch("/api/peace-minutes", {
+      method: "POST",
+      body: JSON.stringify(actualData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
+
+  const savePeaceTime = async (e) => {
+    const response=await savePeaceMinutes();
+    const jsonData = await response.json();
+    if(jsonData.userInfo){
+    }
   };
 
 
@@ -121,7 +150,7 @@ const MarkMinutes = () => {
 
 
       <div className="block  flex justify-center items-center my-6">
-          <button className="text-sm  bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-1 px-8 rounded">
+          <button onClick={savePeaceTime}  className="text-sm  bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-1 px-8 rounded">
             Submit
           </button>
         </div>
