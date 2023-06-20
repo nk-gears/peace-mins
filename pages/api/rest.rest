@@ -15,7 +15,9 @@ Content-Type: application/json
 POST http://localhost:3000/api/users
 Content-Type: application/json
 
-{"id":"1222","user_type":2,"user_email":"kumar.nirmal.v@gmail.com","user_fullname":"Nirmal Kumar","user_age":12,"user_mobile":"+919283181228","user_city":"CHENNAI","createdAt":1687154319,"updatedAt":1687154319,"user_active":1,"last_user_seen":0,"user_org_name":"ORG1","user_org_contactName":"ORG NK"}
+#{"user_type":1,"user_email":"kumar.nirmal.v@gmail.com","user_fullname":"Nirmal Kumar","user_age":"12","user_mobile":"+919283181228","user_city":"CHENNAI","user_org_name":"","user_org_contactName":""}
+
+ {"user_type":2,"user_email":"kumar.nirmal.v@gmail.com","user_fullname":"Nirmal Kumar","user_age":12,"user_mobile":"+919283181228","user_city":"CHENNAI","createdAt":1687154319,"updatedAt":1687154319,"last_user_seen":0,"user_org_name":"ORG1","user_org_contactName":"ORG NK"}
 
 
 

@@ -1,8 +1,27 @@
 import Image from "next/image";
 import Container from "./container";
 import heroImg from "../public/img/feature3.png";
-
+import { useState,useEffect } from "react";
 const Hero = () => {
+
+
+
+  const [mounted, setMounted] = useState(false);
+  const [isRegistered,setIsRegistered]=useState(false);
+
+  useEffect(() => {setMounted(true);
+  
+    if (typeof window !== "undefined" && window.localStorage) { 
+      const userInfo=localStorage.getItem('userInfo');
+      console.log(userInfo);
+      if(userInfo){
+       setIsRegistered(true);
+      }
+     }
+  
+  }, []);
+
+  if (!mounted) return null;
   return (
     <>
       <Container className="flex flex-wrap ">
@@ -17,6 +36,7 @@ const Hero = () => {
             The campaign aims to raise awareness about the benefits of meditation and encourage participants to incorporate five minutes of daily meditation into their routines.
             </p>
 
+          { isRegistered===false &&
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
               <a
                 href="/register"
@@ -27,7 +47,9 @@ const Hero = () => {
               </a>
             
             </div>
+             }
           </div>
+       
         </div>
         <div className="flex items-center justify-center w-full lg:w-1/2">
           <div className="">

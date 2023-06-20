@@ -2,15 +2,35 @@ import Head from "next/head";
 import Navbar from "../components/navbar";
 import React, { useEffect, useState } from "react";
 import Footer from "../components/footer";
+
+import HeadFav from "../components/head-fav";
 import Link from "next/link";
 
 const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MarkMinutes = () => {
+
+
   const [peaceTime, setPeaceTime] = useState('10:30');
   const [peaceTimeAMPM, setPeaceTimeAMPM] = useState('AM');
   const [todayDate, setTodayDate] = useState(new Date());
+  const [mounted, setMounted] = useState(false);
+  const [isRegistered,setIsRegistered]=useState(true);
+  const [userInfo,setUserInfo]=useState(true);
 
-   useEffect(() => {}, [peaceTime]);
+  useEffect(() => {setMounted(true);
+  
+    if (typeof window !== "undefined" && window.localStorage) { 
+      const _userInfo=localStorage.getItem('userInfo');
+
+      if(_userInfo){
+       setIsRegistered(true);
+       setUserInfo(JSON.parse(_userInfo));
+      }
+     }
+  
+  }, [peaceTime]);
+
+  if (!mounted) return null;
 
   const renderTimeOptions = () => {
     const timeOptions = [];
@@ -58,7 +78,7 @@ const MarkMinutes = () => {
 
   return (
     <>
-      <Head>
+      <Head><HeadFav />
         <title>5 mins for Peace</title>
         <meta name="description" content="5 mins for Peace" />
         <link rel="icon" href="/favicon.ico" />
@@ -80,10 +100,10 @@ const MarkMinutes = () => {
 </select>
       
       </div>
-
+{ userInfo && userInfo.user_type===2 &&
       <div className="mb-1 mr-10 ml-10 m-auto">
       <label htmlFor="org_members" className="m-auto flex justify-center items-center font-medium block mb-2 text-sm text-gray-600 dark:text-white">
-           Total people gathered if you registered as group
+           Total people gathered if you have registered as group
         </label>
         <input
           type="number"
@@ -97,6 +117,7 @@ const MarkMinutes = () => {
           className="bg-gray-50  border border-gray-300 text-gray-900 justify-center items-center m-auto sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
       </div>
+}
 
 
       <div className="block  flex justify-center items-center my-6">

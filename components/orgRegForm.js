@@ -1,44 +1,74 @@
 import React, { useState } from 'react';
 
+import { useRouter } from "next/router";
+
+
+
+
 const OrgRegFormComponent = () => {
-
-
-
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     org_name: '',    
+    org_contact_name:'',
     org_city: '',
     org_email: '',
     org_mobile: '',
     org_agreeTerms: false
 
   });
+ 
+
+  const registerUser = async () => {
+    const actualData = {
+      user_type: 2,
+      user_email: formData.org_email,
+      user_fullname: formData.org_contact_name,
+      user_mobile: formData.mobile,
+      user_city: formData.city,
+      user_org_name: formData.org_name,
+      user_age: 0,
+      user_org_contactName: formData.org_contact_name,
+    };
+    return fetch("/api/users", {
+      method: "POST",
+      body: JSON.stringify(actualData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // You can perform further actions with the form data here, such as sending it to a server
+    //router.push("/my-peace-mins");
 
-    // Reset the form fields
-    setFormData({
-      name: '',
-      age: '',
-      gender: '',
-      city: '',
-      email: '',
-      mobile: ''
-    });
+    const response=await registerUser();
+    const jsonData = await response.json();
+    if(jsonData.userInfo){
+      
+      if (typeof window !== "undefined" && window.localStorage) { 
+        localStorage.setItem('userInfo',JSON.stringify(jsonData.userInfo));
+        //setSubmitState(2);
+        router.push("/reg-thanks");
+      }
+      
+    }
   };
 
+
   return (
-    <form className="max-w-md mx-auto space-y-4 md:space-y-6" onSubmit={handleSubmit}>
+    
+    <form className="max-w-md mx-auto space-y-4  md:space-y-6" onSubmit={handleSubmit}>
+      <span className="block font-normal text-xs italic">Please don't register for multiple users from same mobile device.</span>
       <div className="mb-4 ">
 
 
-        <label htmlFor="org_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        <label htmlFor="org_name" className="block required mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Organization Name
         </label>
         <input
@@ -54,7 +84,7 @@ const OrgRegFormComponent = () => {
       </div>
  
       <div className="mb-4">
-        <label htmlFor="org_city" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        <label htmlFor="org_city" className="block required mb-2 text-sm font-medium text-gray-900 dark:text-white">
            City
         </label>
         <input
@@ -71,14 +101,14 @@ const OrgRegFormComponent = () => {
       <div className="mb-4 ">
 
 
-<label htmlFor="org_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+<label htmlFor="org_contact_name" className="block required mb-2 text-sm font-medium text-gray-900 dark:text-white">
   Contact Name
 </label>
 <input
   type="text"
-  id="org_name"
-  name="org_name"
-  value={formData.org_name}
+  id="org_contact_name"
+  name="org_contact_name"
+  value={formData.org_contact_name}
   onChange={handleChange}
   required
 //   className="border border-gray-400 px-4 py-2 rounded-lg w-full"
@@ -86,7 +116,7 @@ className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
 />
 </div>
       <div className="mb-4">
-        <label htmlFor="org_email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        <label htmlFor="org_email" className="block required mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Contact Email
         </label>
         <input
@@ -100,7 +130,7 @@ className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
         />
       </div>
       <div className="mb-4">
-        <label htmlFor="org_mobile" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+        <label htmlFor="org_mobile" className="block required mb-2 text-sm font-medium text-gray-900 dark:text-white">
           Contact Mobile Number
         </label>
         <input
@@ -121,7 +151,6 @@ className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg
             type="checkbox"
             id="org_agreeTerms"
             name="org_agreeTerms"
-            checked={formData.org_agreeTerms}
             onChange={handleChange}
             required
             className="mr-2"

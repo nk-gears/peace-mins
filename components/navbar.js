@@ -1,13 +1,35 @@
 import Link from "next/link";
 import Image from "next/image"
+import { useState,useEffect } from "react";
 import { Disclosure } from "@headlessui/react";
 
 const Navbar = () => {
+  
+  const [mounted, setMounted] = useState(false);
+  const [isRegistered,setIsRegistered]=useState(false);
+
+  useEffect(() => {setMounted(true);
+  
+    if (typeof window !== "undefined" && window.localStorage) { 
+      const userInfo=localStorage.getItem('userInfo');
+      console.log(userInfo);
+      if(userInfo){
+       setIsRegistered(true);
+      }
+     }
+  
+  }, []);
+
+  if (!mounted) return null;
+
+ 
   const navigation = [
 
-   {title : "Peace Campaign",url:"/campaign"},
-   {title : "FAQ",url:"/faq"},
-   {title : "About Us",url:"/about-us"},
+   {title : "campaign",url:"/campaign"},
+   {title : "faq",url:"/faq"},
+   {title : "about Us",url:"/about-us"},
+   {title : "resources",url:"/resources"},
+   {title : "my minutes",url:"/my-peace-mins"},
 
   
   ];
@@ -66,12 +88,19 @@ const Navbar = () => {
                           {item.title}
                       </Link>
                     ))}
-                    <Link href="/my-peace-mins" className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5">         
-                       My minutes
-                    </Link>
+            
+     
+                    { isRegistered===false && 
                     <Link href="/register" className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5">         
                         Participate Now
                     </Link>
+                    }
+
+                    { isRegistered===true && 
+                    <Link href="/mark-minutes" className="w-full px-6 py-2 mt-3 text-center text-white bg-indigo-600 rounded-md lg:ml-5">         
+                        Mark Peace Minutes
+                    </Link>
+                    }
                   </>
                 </Disclosure.Panel>
               </div>
@@ -89,20 +118,22 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
-             <li className="mr-3 nav__item" key={5}>
-                <Link href="/my-peace-mins" className="inline-block px-4 py-2 text-sm font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800">
-                    My Minutes
-                </Link>
-              </li>
+             
           </ul>
         </div>
 
         <div className="hidden mr-3 space-x-4 lg:flex nav__item">
 
+        { isRegistered===false && 
           <Link href="/register" className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5">
               Participate Now
           </Link>
-
+}
+          { isRegistered===true && 
+                      <Link href="/mark-minutes" className="px-6 py-2 text-white bg-indigo-600 rounded-md md:ml-5">
+                      Mark Peace Minutes
+                  </Link>
+                    }
 
         </div>
       </nav>

@@ -1,5 +1,5 @@
 {
-  "name": "nextly-template",
+  "name": "peace-minutes",
   "version": "0.1.0",
   "description": "Nextly Landing Page Template",
   "private": true,
@@ -30,6 +30,7 @@
     "@heroicons/react": "^2.0.17",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "axios": "^1.4.0",
+    "classnames": "^2.3.2",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.2",
     "next": "^13.3.1",

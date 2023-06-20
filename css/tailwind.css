@@ -30,6 +30,11 @@ li a {
   color:blue;
 }
 
+.required:after {
+  content:" *";
+  color: red;
+}
+
 .segmented-control {
   display: inline-block;
   border: 1px solid #4155FE;

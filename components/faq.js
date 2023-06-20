@@ -35,23 +35,19 @@ const Faq = () => {
 
 const faqdata = [
   {
-    question: "Is this template completely free to use?",
-    answer: "Yes, this template is completely free to use.",
+    question: "How many days this campaign runs?",
+    answer: "Campaign runs for 108 Days. Starting from 21 June 2023 to 7 Oct 2023",
   },
   {
-    question: "Can I use it in a commercial project?",
-    answer: "Yes, this you can.",
+    question: "Who can Participate or eligible?",
+    answer: "Anyone who wishes to enhance their personal peace and contribute to world peace can participate in this program Students, women, and office workers are especially encouraged to take part and support this project.",
   },
   {
-    question: "What is your refund policy? ",
+    question: "As a individual what should i do after registering? ",
     answer:
-      "If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked.",
-  },
-  {
-    question: "Do you offer technical support? ",
-    answer:
-      "No, we don't offer technical support for free downloads. Please purchase a support plan to get 6 months of support.",
-  },
+      "The project follows the belief that small actions can create a significant impact. Participants are encouraged to spend 5 minutes daily engaging in quiet reflection and creating positive thoughts. By doing so, they not only increase their own inner peace but also contribute to world peace.",
+  } 
+   
 ];
 
 export default Faq;

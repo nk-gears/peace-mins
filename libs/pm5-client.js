@@ -59,6 +59,7 @@ export async function isUserExists({userEmail,userMobile}) {
 
 export async function addNewUser(payload) {
     payload.id=nanoid(10);
+    payload.last_user_seen=0;
 
     //const data={"id":"add2232311","user_type":1,"user_email":"kumar.nirmal.v@gmail.com","user_fullname":"Nirmal Kumar","user_age":12,"user_mobile":"+919283181228","user_city":"CHENNAI","user_active":1,"last_user_seen":0}
     //?filter1=user_email,eq,kumar.nirmal.v@gmail.com&filter2=user_mobile,eq,+919283181228

@@ -1,14 +1,20 @@
 import Head from "next/head";
 import Navbar from "../components/navbar";
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import Footer from "../components/footer";
+
+
+import HeadFav from "../components/head-fav";
 import UserRegFormComponent from "../components/userRegForm";
 import OrgRegFormComponent from "../components/orgRegForm";
 
 
 const Register = () => {
 
-  const [regMode, setRegMode] = useState("1");
+  
+  const [regMode, setRegMode] = useState(1);
+
+  useEffect(() => {setRegMode("1");}, []);
 
   const handleChange = (e) => {
 
@@ -19,7 +25,7 @@ const Register = () => {
 
   return (
     <>
-      <Head>
+      <Head><HeadFav />
         <title>5 mins for Peace</title>
         <meta
           name="description"
@@ -32,9 +38,9 @@ const Register = () => {
    
       <section className="bg-gray-50 dark:bg-gray-900">
       <div className="text-center py-3 my-3 px-0 my-0  lg:py-0">
-      <ul class="segmented-control " onChange={handleChange}>
-    <li class="segmented-control__item  focus:ring-4 focus:outline-none ">
-        <a href="#"><input    class="segmented-control__input" type="radio" value="1" name="option" id="option-1" 
+      <ul className="segmented-control " onChange={handleChange}>
+    <li className="segmented-control__item  focus:ring-4 focus:outline-none ">
+        <a href="#"><input    className="segmented-control__input" type="radio" value="1" name="option" id="option-1" 
         
         onChange={() => {
 								
@@ -45,10 +51,10 @@ const Register = () => {
 
 
         />
-          <label class="segmented-control__label" for="option-1">Individual</label></a>
+          <label className="segmented-control__label" htmlFor="option-1">Individual</label></a>
     </li>
-    <li class="segmented-control__item  focus:ring-4 focus:outline-none ">
-        <a href="#"><input   class="segmented-control__input" type="radio" value="2" name="option" id="option-2" 
+    <li className="segmented-control__item  focus:ring-4 focus:outline-none ">
+        <a href="#"><input   className="segmented-control__input" type="radio" value="2" name="option" id="option-2" 
             onChange={() => {
 								
               setRegMode("2");
@@ -57,7 +63,7 @@ const Register = () => {
               defaultChecked={regMode=="2"}
         
         />
-          <label class="segmented-control__label" for="option-2">Group</label></a>
+          <label className="segmented-control__label" htmlFor="option-2">Group</label></a>
     </li>
 </ul>
       </div>
@@ -70,6 +76,7 @@ const Register = () => {
                <>
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                  Participant Details
+                 <span className="block font-normal text-xs italic">Please don't register for multiple users from same mobile device.</span>
               </h1>
               <UserRegFormComponent />
               </>
