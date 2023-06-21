@@ -187,33 +187,33 @@ const MarkMinutes = () => {
       <div className="m-4 justify-top flex items-center justify-center">
         <div className="bg1-gray-800 border-2 border1-gray-900 shadow-2xl rounded-lg">
           <div className="p-6 text-gray-800 grid grid-cols-3 gap-3 text-sm">
-            <button className="font-mono bg-gray-300 hover:bg-indigo-400 rounded-full p-5" onClick={handlePredefined} >
+            <button className="hover:animate-pulse hover:text-white font-medium bg-gray-200 hover:bg-indigo-500 rounded-full p-5" onClick={handlePredefined} >
               04:00 AM
             </button>
-            <button className="font-mono bg-gray-300 hover:bg-indigo-400 rounded-full p-5" onClick={handlePredefined} >
+            <button className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-indigo-500 rounded-full p-5" onClick={handlePredefined} >
               05:45 AM
             </button>
-            <button className="font-mono bg-gray-300 hover:bg-indigo-400 rounded-full p-5" onClick={handlePredefined} >
+            <button className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-indigo-500 rounded-full p-5" onClick={handlePredefined} >
               07:00 AM
             </button>
 
-            <button className="font-mono bg-gray-300 hover:bg-indigo-400 rounded-full p-5" onClick={handlePredefined} >
+            <button className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-indigo-500 rounded-full p-5" onClick={handlePredefined} >
               10:30 AM
             </button>
-            <button className="font-mono bg-gray-300 hover:bg-indigo-400 rounded-full p-5" onClick={handlePredefined} >
+            <button className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-indigo-500 rounded-full p-5" onClick={handlePredefined} >
               12:00 PM
             </button>
-            <button className="font-mono bg-gray-300 hover:bg-indigo-400 rounded-full p-5" onClick={handlePredefined} >
+            <button className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-indigo-500 rounded-full p-5" onClick={handlePredefined} >
               05:30 PM
             </button>
 
-            <button className="font-mono bg-gray-300 hover:bg-indigo-400 rounded-full p-5" onClick={handlePredefined} >
+            <button className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-indigo-500 rounded-full p-5" onClick={handlePredefined} >
               07:30 PM
             </button>
-            <button className="font-mono bg-gray-300 hover:bg-indigo-400 rounded-full p-5" onClick={handlePredefined} >
+            <button className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-indigo-500 rounded-full p-5" onClick={handlePredefined} >
               09:30 PM
             </button>
-            <button className="font-mono bg-gray-300 hover:bg-indigo-400 rounded-full p-5" onClick={handlePredefined} >
+            <button className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-indigo-500 rounded-full p-5" onClick={handlePredefined} >
               10:00 PM
             </button>
           </div>
@@ -235,6 +235,15 @@ const MarkMinutes = () => {
             className="inline-block px-4 py-2 text-sm font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
           >
             Global Minutes
+          </Link>
+        </li>
+        |
+        <li className="mr-3 nav__item" key={15}>
+          <Link
+            href="/resources"
+            className="animate-pulse inline-block px-4 py-2 text-sm font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
+          >
+            Resources
           </Link>
         </li>
       </ul>

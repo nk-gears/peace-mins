@@ -5,6 +5,15 @@ import Container from "./container";
 
 export default function Footer() {
   const navigation = [
+    {
+      title:"feedback",link:"https://docs.google.com/forms/d/e/1FAIpQLSe_Hk9bv9xNCWpz-1hMuoV2yTVZROmdW6RUx0OyLmRlol_XkQ/viewform"
+    },
+    {
+      title:"global minutes",link:"/global-minutes"
+    },
+    {
+      title:"resources",link:"/resources"
+    }
 
   ];
   const legal = [];//"Terms", "Privacy", "Legal"];
@@ -13,21 +22,6 @@ export default function Footer() {
       <Container>
         <div className="grid max-w-screen-xl grid-cols-1 gap-10 pt-10 mx-auto mt-5 border-t border-gray-100 dark:border-trueGray-700 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            {/* <div>
-              {" "}
-              <Link href="/" className="flex items-center space-x-2 text-2xl font-medium text-indigo-500 dark:text-gray-100">
-                    <Image
-                      src="/img/brand-logo-bird.png"
-                      alt="N"
-                      width="32"
-                      height="32"
-                      className="w-8"
-                    />
-             
-                  <span className="my-0 py-0 text-brandBase">5 Mins for Peace<span className="block text-black my-0 py-0 text-xs text-grey-dark m-0 p-0">Meditate - Transform - Everyday</span> </span>
-                 
-              </Link>
-            </div> */}
           
 
             <div className="mt-5">
@@ -38,19 +32,15 @@ export default function Footer() {
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
               {navigation.map((item, index) => (
-                <Link key={index} href="/" className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">                 
-                    {item}
+                <Link key={index} href={item.link} className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">                 
+                    {item.title}
                 </Link>
               ))}
             </div>
           </div>
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
-              {legal.map((item, index) => (
-                <Link key={index} href="/" className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">      
-                    {item}
-                </Link>
-              ))}
+             
             </div>
           </div>
           <div className="">
@@ -133,16 +123,9 @@ const Instagram = ({ size = 24 }) => (
 );
 
 const Youtube = ({ size = 24 }) => (
-  <svg class="social-icon"  width={size}
-  height={size}
-  viewBox="0 0 24 24"
-  fill="currentColor">
-  <path d="M459,61.2C443.7,56.1,349.35,51,255,51c-94.35,0-188.7,5.1-204,10.2C10.2,73.95,0,163.2,0,255s10.2,181.05,51,193.8
-             C66.3,453.9,160.65,459,255,459c94.35,0,188.7-5.1,204-10.2c40.8-12.75,51-102,51-193.8S499.8,73.95,459,61.2z M204,369.75v-229.5
-             L357,255L204,369.75z" />
-             </svg>
-
-
+ <svg xmlns="http://www.w3.org/2000/svg"   width={size}
+ height={size}
+ viewBox="0 0 24 24"    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"> <path stroke="none" d="M0 0h24v24H0z" fill="none"/> <rect x="3" y="5" width="18" height="14" rx="4" /> <path d="M10 9l5 3l-5 3z" /> </svg>
 );
 
 const Backlink = () => {
