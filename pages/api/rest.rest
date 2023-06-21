@@ -25,7 +25,9 @@ Content-Type: application/json
 POST http://localhost:3000/api/peace-minutes
 Content-Type: application/json
 
-{"user_id":"1","event_date":123123213,"event_time":"10:30 AM","event_minutes":122,"event_members":12,"createdAt":12123213,"updatedAt":123123}
+{"user_id":"ePvUgkDrjF","event_date":1687278221,"event_time":"10:30","event_minutes":5,"event_members":1}
+
+#{"user_id":"1","event_date":123123213,"event_time":"10:30 AM","event_minutes":122,"event_members":12,"createdAt":12123213,"updatedAt":123123}
 
 
 

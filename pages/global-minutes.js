@@ -4,7 +4,44 @@ import Image from "next/image";
 import Footer from "../components/footer";
 import HeadFav from "../components/head-fav";
 import Link from "next/link";
+import { useState,useEffect } from "react";
+
+
 const GlobalPeaceMins = () => {
+
+  const [mounted, setMounted] = useState(false);
+
+  const [totalMinutes,setTotalMinutes]=useState('...');
+
+  const loadTotalMinutes=async ()=>{
+
+    return fetch(`/api/peace-minutes/all`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  useEffect(() => {setMounted(true);
+  
+    if (typeof window !== "undefined" && window.localStorage) { 
+     
+       async function fetchData() {
+        const response=await loadTotalMinutes();
+        const jsonData = await response.json();
+
+        setTotalMinutes(jsonData.totalMinutes);
+      }
+
+      fetchData();
+       
+     
+     }
+  
+  }, []);
+
+  if (!mounted) return null;
   return (
     <>
       <Head><HeadFav />
@@ -65,7 +102,7 @@ const GlobalPeaceMins = () => {
 
 
       <div className="flex items-center text-center w-full justify-center bg-white-50 pt-4 mt-2">
-      <p>Minutes of Peace Contributed Globally - Today</p>
+      <p>Minutes of Peace Contributed Globally. </p>
       </div>
       <div className="py-8 flex items-center justify-center bg-white-50 space-x-8">
         
@@ -73,16 +110,16 @@ const GlobalPeaceMins = () => {
          
           <span className="absolute text-8xl left-0 top-0 text-purple-800 "></span>
           <span className="text-5xl text-brandBase">
-            <span>
+          <span className="h-screen">
               <Image
                 src="/img/brand-logo-bird.png"
                 alt="N"
                 width="160"
                 height="260"
-                className="w-8 text-center align-center"
+                className="mx-auto animate-bounce   w-8 text-center align-center"
               />
             </span>
-            951110
+            <span className="animate-bounce">{totalMinutes}</span>
             <span className="block text-xl text-brandBase text-gray-500">
               {" "}
               minutes of peace globally

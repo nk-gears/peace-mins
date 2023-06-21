@@ -2,12 +2,54 @@ import Head from "next/head";
 import Navbar from "../components/navbar";
 import Image from "next/image";
 import Footer from "../components/footer";
-
+import { useRouter } from "next/router";
 import HeadFav from "../components/head-fav";
 import Link from "next/link";
-import ButtonGroupPM from "../components/segmentedControl";
+import { useState,useEffect } from "react";
 
 const MyPeaceMins = () => {
+
+  const router = useRouter();
+  const [mounted, setMounted] = useState(false);
+  const [isRegistered,setIsRegistered]=useState(false);
+  const [userInfo,setUserInfo]=useState(false);
+  const [totalMinutes,setTotalMinutes]=useState('...');
+
+  const loadTotalMinutes=async (userInfo)=>{
+
+    return fetch(`/api/peace-minutes/${userInfo.id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  }
+
+  useEffect(() => {setMounted(true);
+  
+    if (typeof window !== "undefined" && window.localStorage) { 
+      const _userInfo=localStorage.getItem('userInfo');
+   
+      async function fetchData() {
+        const response=await loadTotalMinutes(JSON.parse(_userInfo));
+        const jsonData = await response.json();
+        setTotalMinutes(jsonData.totalMinutes);
+      }
+
+      if(_userInfo){
+       setIsRegistered(true);
+       setUserInfo(JSON.parse(_userInfo));
+      fetchData();
+       
+      }else{
+        router.push('/register');
+      }
+     }
+  
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <>
       <Head><HeadFav />
@@ -66,22 +108,22 @@ const MyPeaceMins = () => {
       </div> */}
 
       <div className="flex items-center text-center w-full justify-center bg-white-50 pt-4 mt-2">
-      <p>Today</p>
+      <p>Peace Minutes from <span>{userInfo.user_org_name || userInfo.user_fullname} - {userInfo.user_city} </span></p>
       </div>
       <div className="py-8 flex items-center justify-center bg-white-50 space-x-8">
         <div className="relative w-64 h-64 bg-indigo-100 rounded-full flex justify-center items-center text-center p-5 shadow-xl">
           <span className="absolute text-8xl left-0 top-0 text-purple-800 "></span>
-          <span className="text-5xl text-brandBase">
-            <span>
+          <span className="text-5xl text-brandBase ">
+            <span className="h-screen">
               <Image
                 src="/img/brand-logo-bird.png"
                 alt="N"
                 width="160"
                 height="260"
-                className="w-8 text-center align-center"
+                className="mx-auto animate-bounce   w-8 text-center align-center"
               />
             </span>
-            951110
+            <span className="animate-bounce">{totalMinutes}</span>
             <span className="block text-xl text-brandBase text-gray-400">
               minutes of peace
             </span>

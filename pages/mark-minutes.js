@@ -2,15 +2,20 @@ import Head from "next/head";
 import Navbar from "../components/navbar";
 import React, { useEffect, useState } from "react";
 import Footer from "../components/footer";
+import { useRouter } from "next/router";
+
 
 import HeadFav from "../components/head-fav";
 import Link from "next/link";
 
 const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const MarkMinutes = () => {
-
+  const router = useRouter();
 
   const [peaceTime, setPeaceTime] = useState('10:30');
+  
+  const [memberCount, setMemberCount] = useState(1);
+  
   const [peaceTimeAMPM, setPeaceTimeAMPM] = useState('AM');
   const [todayDate, setTodayDate] = useState(new Date());
   const [mounted, setMounted] = useState(false);
@@ -50,11 +55,11 @@ const MarkMinutes = () => {
 
   const savePeaceMinutes = async () => {
     const actualData = {
-      user_id:userInfo.user_id,
-      event_date:Date. now(),
-      event_time:formData.peaceTime,
-      event_minutes:formData.memberCount * 5,
-      event_members:formData.memberCount
+      user_id:userInfo.id,
+      event_date:Date.now()/1000,
+      event_time:peaceTime,
+      event_minutes:memberCount * 5,
+      event_members:memberCount
 
     };
     return fetch("/api/peace-minutes", {
@@ -70,7 +75,8 @@ const MarkMinutes = () => {
   const savePeaceTime = async (e) => {
     const response=await savePeaceMinutes();
     const jsonData = await response.json();
-    if(jsonData.userInfo){
+    if(jsonData.peaceMinutes){
+        router.push("/my-peace-mins");
     }
   };
 
@@ -84,6 +90,12 @@ const MarkMinutes = () => {
       <option key={"PM"} value={"PM"}>{"PM"}</option>
     );
     return timeOptions;
+  };
+
+  const handleMemberCount = (event) => {
+    const memberCount = event.target.value;
+    setMemberCount(memberCount);
+
   };
 
   const handleTimeChange = (event) => {
@@ -117,9 +129,17 @@ const MarkMinutes = () => {
       <div className="flex justify-center items-center my-3 text-indigo-900">
         <h4>Mark your Peace Minutes for Today - { todayDate.getDate() + ' ' + months[todayDate.getMonth()] + ' ' + todayDate.getFullYear()}</h4>
       </div>
+      { userInfo && userInfo.user_type===2 &&
       <p className="flex justify-center items-center">
-        Select the Time in which you have remained in peace.
+      Select the Time in which the group remained in peace.
       </p>
+}
+
+{ userInfo && userInfo.user_type===1 &&
+      <p className="flex justify-center items-center">
+      Select the Time in which you have remained in peace.
+      </p>
+}
       <div className="flex justify-center items-center my-6">
       <select id="timePicker" onChange={handleTimeChange} className="text-3xl text-purple-900" value={peaceTime}>
   {renderTimeOptions()}
@@ -132,24 +152,29 @@ const MarkMinutes = () => {
 { userInfo && userInfo.user_type===2 &&
       <div className="mb-1 mr-10 ml-10 m-auto">
       <label htmlFor="org_members" className="m-auto flex justify-center items-center font-medium block mb-2 text-sm text-gray-600 dark:text-white">
-           Total people gathered if you have registered as group
+           Enter total people gathered. <span>Total minutes : {memberCount * 5}</span>
         </label>
         <input
           type="number"
           id="org_members"
           name="org_members"
           size="200"
+          maxLength={1}
           defaultValue={1}
           min="1" max="1000"
+          onChange={handleMemberCount}
           placeholder="Select no of people gathered."
           required
           className="bg-gray-50  border border-gray-300 text-gray-900 justify-center items-center m-auto sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         />
+      
       </div>
 }
 
+<div className="block  flex justify-center items-center my-2">
 
-      <div className="block  flex justify-center items-center my-6">
+  </div>
+      <div className="block  flex justify-center items-center my-4">
           <button onClick={savePeaceTime}  className="text-sm  bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-1 px-8 rounded">
             Submit
           </button>
