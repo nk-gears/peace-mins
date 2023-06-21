@@ -72,7 +72,7 @@ const MarkMinutes = () => {
       user_id:userInfo.id,
       event_date:Date.now()/1000,
       event_date_str:formatDate(Date.now()),
-      event_time:peaceTime,
+      event_time:peaceTime + " " + peaceTimeAMPM,
       event_minutes:memberCount * 5,
       event_members:memberCount
 
