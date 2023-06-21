@@ -12,7 +12,7 @@ import benefitTwoImg from "../public/img/feature2.png";
 
 const benefitOne = {
   title: "5 minutes daily ",
-  desc: `Meditation is not just a process we do early in the morning and completely forgetting the whole day and bounce back the next day. It’s a continuous process of taming our minds the way I need to think. Which needs continuous practice in equal intervals`,
+  desc: `Meditation is not just a process we do early in the morning and completely forgetting the whole day and bounce back the next day. It’s a continuous process of taming our minds the way I need to think. Which needs continuous practice in equal intervals. This project is a new initiative of Brahma Kumaris, helping you to practise meditation daily.  The aim is to enhance global peace by fostering inner peace in individuals.`,
   
   image: benefitOneImg,
   bullets: [],
@@ -36,7 +36,7 @@ const benefitOne = {
 
 const benefitTwo = {
   title: "Keep a track of your Peace Minutes",
-  desc: "This campaign promotes peace within and around and also helps to track the minutes spent in peace. You can also watch out the total minutes spent globally.",
+  desc: "Just spend 5 minutes everyday and let us know when you are doing. Join with the larger community that practices meditation regularly. By allocating a minimum of 5 minutes each day to create positive thoughts we can nurture inner peace and positive mindset",
   image: benefitTwoImg,
   bullets: [],
     // {

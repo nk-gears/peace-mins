@@ -220,6 +220,15 @@ const MarkMinutes = () => {
         </div>
       </div>
       <ul className="flex items-center justify-center items-center justify-center flex-1 pt-6 list-none lg:pt-0 lg:flex">
+      <li className="mr-3 nav__item" key={15}>
+          <Link
+            href="/resources"
+            className="animate-pulse inline-block px-4 py-2 text-sm font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
+          >
+            Resources
+          </Link>
+        </li>
+        |
         <li className="mr-3 nav__item" key={25}>
           <Link
             href="/my-peace-mins"
@@ -237,15 +246,8 @@ const MarkMinutes = () => {
             Global Minutes
           </Link>
         </li>
-        |
-        <li className="mr-3 nav__item" key={15}>
-          <Link
-            href="/resources"
-            className="animate-pulse inline-block px-4 py-2 text-sm font-normal text-gray-800 no-underline rounded-md dark:text-gray-200 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-gray-800"
-          >
-            Resources
-          </Link>
-        </li>
+        
+       
       </ul>
 
       <Footer />

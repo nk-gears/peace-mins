@@ -30,6 +30,9 @@ const Campaign = () => {
             <div className="text-left">
 This aims to help individuals realize their responsibility in increasing world peace by maintaining a calm and peaceful state of mind. By dedicating at least 5 minutes each day to generating positive thoughts, individuals can cultivate inner peace and contribute to global harmony.
 </div>
+<div className="text-left">
+This campaign runs for 108 days from Jun 21 to Oct 07 2023. It also helps to track the minutes spent in peace. You can also watch out the total minutes spent globally.
+</div>
 
 
 <div className="text-left">
