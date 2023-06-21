@@ -53,10 +53,25 @@ const MarkMinutes = () => {
 
 
 
+  function formatDate(date) {
+    var d = new Date(date),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) 
+        month = '0' + month;
+    if (day.length < 2) 
+        day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
   const savePeaceMinutes = async () => {
     const actualData = {
       user_id:userInfo.id,
       event_date:Date.now()/1000,
+      event_date_str:formatDate(Date.now()),
       event_time:peaceTime,
       event_minutes:memberCount * 5,
       event_members:memberCount
@@ -75,9 +90,9 @@ const MarkMinutes = () => {
   const savePeaceTime = async (e) => {
     const response=await savePeaceMinutes();
     const jsonData = await response.json();
-    if(jsonData.peaceMinutes){
+    //if(jsonData.peaceMinutes){
         router.push("/my-peace-mins");
-    }
+    //}
   };
 
 

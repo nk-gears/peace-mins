@@ -11,7 +11,7 @@ export default async (req, res) => {
     // // Handle any errors that occur during the request
     // console.error('Error fetching data from GitHub API:', error);   
     // // Return an error response
-    console.log(error);
+    //const response = error.response;
     res.status(500).json({ error: 'Error adding peace minutes' });
   }
 };

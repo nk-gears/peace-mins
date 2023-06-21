@@ -30,8 +30,12 @@ const Home = () => {
    
       <Benefits data={benefitOne} />
       <Benefits imgPos="right" data={benefitTwo} />
-    
-
+      <SectionTitle
+        pretitle=""
+        title="Good Wishes from Seniors - Yoga Day 2023">
+       
+      </SectionTitle>
+      <Video />
       {/* <Cta /> */}
       <Footer />
       
