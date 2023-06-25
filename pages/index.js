@@ -2,18 +2,15 @@ import Head from "next/head";
 import Hero from "../components/hero";
 import Navbar from "../components/navbar";
 import SectionTitle from "../components/sectionTitle";
-
 import { benefitOne, benefitTwo } from "../components/data";
 import Video from "../components/video";
 import Benefits from "../components/benefits";
 import Footer from "../components/footer";
-
+import { NotificationList } from "../components/notificationList";
 import HeadFav from "../components/head-fav";
 
 
 const Home = () => {
-
-
   return (
     <>
       <Head><HeadFav />
@@ -27,7 +24,7 @@ const Home = () => {
 
       <Navbar />
       <Hero />
-   
+      <NotificationList />
       <Benefits data={benefitOne} />
       <Benefits imgPos="right" data={benefitTwo} />
       <SectionTitle

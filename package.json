@@ -29,8 +29,11 @@
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
     "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@vercel/kv": "^0.2.2",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "firebase": "^9.23.0",
+    "localforage": "^1.10.0",
     "lodash": "^4.17.21",
     "nanoid": "^4.0.2",
     "next": "^13.3.1",
@@ -40,7 +43,8 @@
     "react-hook-form": "^7.43.9",
     "react-time-picker": "^6.2.0",
     "react-timeit": "^1.2.12",
-    "tw-elements": "^1.0.0-beta2"
+    "tw-elements": "^1.0.0-beta2",
+    "web-push": "^3.6.3"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",

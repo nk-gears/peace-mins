@@ -2,6 +2,8 @@ import axios from 'axios';
 import { nanoid } from 'nanoid'
 
 
+
+
 const BASE_URL="http://happy-village.org/depo/api.php/records";
 export async function getUserInfo(userId) {
     const resUrl=`${BASE_URL}/pm5_users/${userId}`
@@ -17,6 +19,20 @@ export async function addUserMinutes(payload) {
 }
 
 
+export async function subscribeUser(payload) {
+    
+    //const userInfo=await getUserInfo(payload.userId);
+    const resUrl=`${BASE_URL}/pm5_push_subscriptions`;
+    const subInfo={}
+    subInfo.user_id=payload.userId;
+    subInfo.subscription=JSON.stringify(payload.subscription);
+    subInfo.technology='technology';
+    const response = await axios.post(resUrl,subInfo);
+    return response.data;
+}
+
+
+
 export async function getUserPeaceMinutes(userId) {
     const resUrl=`${BASE_URL}/pm5_user_minutes?filter1=user_id,eq,${userId}`;
     const response = await axios.get(resUrl);
@@ -28,6 +44,15 @@ export async function getGlobalPeaceMinutes() {
     const response = await axios.get(resUrl);
     return response.data;
 }
+
+export async function getSubscribedUsers() {
+    //?filter1=user_email,eq,kumar.nirmal.v@gmail.com&filter2=user_mobile,eq,+919283181228
+    //const paramUrl=`?filter1=user_email,eq,${userEmail}.com&filter2=user_mobile,eq,${userMobile}`;
+    const resUrl=`${BASE_URL}/pm5_push_subscriptions`
+    const response = await axios.get(resUrl);
+    return response.data.records;
+}
+
 
 export async function getUserInfoByUnique({userEmail,userMobile}) {
     //?filter1=user_email,eq,kumar.nirmal.v@gmail.com&filter2=user_mobile,eq,+919283181228
