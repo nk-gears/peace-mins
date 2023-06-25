@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from "react"
-import {Notification} from './notification';
+
 
 const isBrowser = () => typeof window !== 'undefined';
 let worker
@@ -32,7 +32,7 @@ if (isBrowser()) {
 
         await fetch('/api/sub', {
           method: 'POST',
-          body: JSON.stringify({ subscription })
+          body: JSON.stringify({userId:'', subscription })
         })
       })
   }
@@ -56,7 +56,7 @@ export function NotificationList() {
       {
         notifications.map((notificationValue, i) => (
           <li key={i}>
-            <Notification value={notificationValue} />
+            {/* <Notification value={notificationValue} /> */}
           </li>
         ))
       }

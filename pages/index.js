@@ -6,7 +6,6 @@ import { benefitOne, benefitTwo } from "../components/data";
 import Video from "../components/video";
 import Benefits from "../components/benefits";
 import Footer from "../components/footer";
-import { NotificationList } from "../components/notificationList";
 import HeadFav from "../components/head-fav";
 
 
@@ -24,7 +23,7 @@ const Home = () => {
 
       <Navbar />
       <Hero />
-      <NotificationList />
+   
       <Benefits data={benefitOne} />
       <Benefits imgPos="right" data={benefitTwo} />
       <SectionTitle

@@ -23,6 +23,45 @@ const MarkMinutes = () => {
   const [isSubmitted,setIsSubmitted]=useState(false);
   const [userInfo,setUserInfo]=useState(true);
 
+
+  const isBrowser = () => typeof window !== 'undefined';
+  let worker
+
+  const requestNotification= (userInfo)=>{
+
+if (isBrowser()) {
+  worker = navigator.serviceWorker
+  window.Notification.requestPermission()
+    .then((permission) => {
+      if (permission !== "granted") return;
+    })
+
+  if (window.Notification.permission) {
+    worker
+      .register('/workers/notification-sw.js')
+      .then(async worker => {
+        let subscription = await worker.pushManager.getSubscription()
+
+        if (!subscription) {
+          const publicKey = await fetch('/api/sub')
+            .then(res => res.json())
+
+          subscription = await worker.pushManager.subscribe({
+            applicationServerKey: publicKey.pubKey,
+            userVisibleOnly: true
+          })
+        }
+
+        await fetch('/api/sub', {
+          method: 'POST',
+          body: JSON.stringify({userId:userInfo.id, subscription })
+        })
+      })
+  }
+}
+    
+  }
+
   useEffect(() => {setMounted(true);
   
     if (typeof window !== "undefined" && window.localStorage) { 
@@ -31,6 +70,7 @@ const MarkMinutes = () => {
       if(_userInfo){
        setIsRegistered(true);
        setUserInfo(JSON.parse(_userInfo));
+       requestNotification(_userInfo);
       }
      }
   

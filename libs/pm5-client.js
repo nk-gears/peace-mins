@@ -26,7 +26,7 @@ export async function subscribeUser(payload) {
     const subInfo={}
     subInfo.user_id=payload.userId;
     subInfo.subscription=JSON.stringify(payload.subscription);
-    subInfo.technology='technology';
+    subInfo.technology='webpush';
     const response = await axios.post(resUrl,subInfo);
     return response.data;
 }
