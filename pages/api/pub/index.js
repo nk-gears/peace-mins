@@ -6,7 +6,7 @@ const currentVercelURL = process.env.VERCEL
   : process.env.VERCEL_URL
 
 WebPush.setVapidDetails(
-  'https://peace-mins-util.vercel.app/api/sub',
+  currentVercelURL,
   process.env.PUBLIC_NOTIFICATION_KEY ?? '',
   process.env.PRIVATE_NOTIFICATION_KEY ?? ''
 )
@@ -21,10 +21,14 @@ export default async function handler(req, res) {
 
     if(userSub.subscription){
       const subscription=JSON.parse(userSub.subscription);
+      try{
       WebPush.sendNotification(subscription, JSON.stringify({
         "content":payload.content,
         "timestamp": new Date()
       }));
+    }catch{
+      
+    }
     }
    
   }

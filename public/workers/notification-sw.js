@@ -28,11 +28,27 @@ self.addEventListener("push", function onPush(event) {
       body: data.message.body,
       icon: data.message.icon,
       actions: [
-        { action: "Button one", title: "Button one text" },
-        { action: "Button two", title: "Button two text" },
+        { action: "mark-minutes", title: "Mark Minutes" },
+        { action: "global-minutes", title: "Global Minutes" },
       ],
     })
   );
+});
+
+const processAction= (action)=>{
+  if(action){
+    clients.openWindow('/my-peace-minutes');
+  }else{
+    clients.openWindow('/'+action);
+  }
+}
+
+self.addEventListener('notificationclick', (event) => {
+  const clickedNotification = event.notification;
+  clickedNotification.close();
+  // Do something as the result of the notification click
+  const promiseChain = processAction(event.action);
+  event.waitUntil(promiseChain);
 });
 
 // self.addEventListener('push', (event) => {

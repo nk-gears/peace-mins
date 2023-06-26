@@ -7,7 +7,7 @@ const currentVercelURL = process.env.VERCEL
   : process.env.VERCEL_URL
 
 WebPush.setVapidDetails(
-  currentVercelURL ?? 'https://peace-mins-util.vercel.app',
+  currentVercelURL ,
   process.env.PUBLIC_NOTIFICATION_KEY ?? '',
   process.env.PRIVATE_NOTIFICATION_KEY ?? ''
 )

@@ -51,10 +51,10 @@ if (isBrowser()) {
             userVisibleOnly: true
           })
         }
-
+        const tzOffset=(new Date()).getTimezoneOffset();
         await fetch('/api/sub', {
           method: 'POST',
-          body: JSON.stringify({userId:userInfo.id, subscription })
+          body: JSON.stringify({tzOffset:tzOffset,userId:userInfo.id, subscription })
         })
       })
   }
