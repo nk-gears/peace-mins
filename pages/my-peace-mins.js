@@ -13,7 +13,17 @@ const MyPeaceMins = () => {
   const [mounted, setMounted] = useState(false);
   const [isRegistered,setIsRegistered]=useState(false);
   const [userInfo,setUserInfo]=useState(false);
+  const [remindUser,setRemindUser]=useState(1);
   const [totalMinutes,setTotalMinutes]=useState('...');
+
+  const saveUserPref=async (_pushEnabled)=>{
+      await fetch(`/api/users/${userInfo.id}`, {
+          method: 'PUT',
+          contentType:"application/json",
+          body: JSON.stringify({push_enabled:_pushEnabled})
+        })
+  }
+
 
   const loadTotalMinutes=async (userInfo)=>{
 
@@ -25,6 +35,13 @@ const MyPeaceMins = () => {
     });
   }
 
+  const handleChange=async (e)=>{
+    setRemindUser(e.target.checked===true?1:0);
+    userInfo.push_enabled=e.target.checked===true?1:0;
+    localStorage.setItem('userInfo',JSON.stringify(userInfo));
+    await saveUserPref(e.target.checked===true?1:0);
+
+  }
   useEffect(() => {setMounted(true);
   
     if (typeof window !== "undefined" && window.localStorage) { 
@@ -39,6 +56,8 @@ const MyPeaceMins = () => {
       if(_userInfo){
        setIsRegistered(true);
        setUserInfo(JSON.parse(_userInfo));
+
+       setRemindUser(userInfo.push_enabled);
       fetchData();
        
       }else{
@@ -46,7 +65,7 @@ const MyPeaceMins = () => {
       }
      }
   
-  }, []);
+  }, [remindUser]);
 
   if (!mounted) return null;
 
@@ -107,6 +126,14 @@ const MyPeaceMins = () => {
         </button>
       </div> */}
 
+<div className="text-center px-6 py-0 m-0">
+<span className="block ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Remind me to Mark Minutes at 12 PM and 9 PM Everyday (Push Notification)</span>
+<label className="block relative inline-flex items-center cursor-pointer">
+<input type="checkbox"  checked={remindUser===1?"checked":""} className="block sr-only peer" onChange={handleChange}/>
+<div className="block w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+</label>
+
+</div>
       <div className="flex items-center text-center w-full justify-center bg-white-50 pt-4 mt-2">
       <p>Peace Minutes from <span>{userInfo.user_org_name || userInfo.user_fullname} - {userInfo.user_city} </span></p>
       </div>
@@ -129,8 +156,10 @@ const MyPeaceMins = () => {
             </span>
           </span>
         </div>
+
       </div>
-      <p className="text-center px-6 py-0 m-0">
+    
+      <p className="text-center px-6 py-2 m-0">
         Thanks for your contribution to spread the peace in and around the globe
         so far.
       </p>

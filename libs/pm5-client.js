@@ -1,10 +1,20 @@
 import axios from 'axios';
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 
 
 
 
 const BASE_URL="http://happy-village.org/depo/api.php/records";
+
+export async function saveUserInfo(userId,userInfo) {
+    const resUrl=`${BASE_URL}/pm5_users/${userId}`
+    const response = await axios.put(resUrl,userInfo);
+    console.log(userInfo)
+    return response.data;
+}
+
+
+
 export async function getUserInfo(userId) {
     const resUrl=`${BASE_URL}/pm5_users/${userId}`
     const response = await axios.get(resUrl);
@@ -46,11 +56,10 @@ export async function getGlobalPeaceMinutes() {
 }
 
 export async function getSubscribedUsers() {
-    //?filter1=user_email,eq,kumar.nirmal.v@gmail.com&filter2=user_mobile,eq,+919283181228
-    //const paramUrl=`?filter1=user_email,eq,${userEmail}.com&filter2=user_mobile,eq,${userMobile}`;
-    const resUrl=`${BASE_URL}/pm5_push_subscriptions`
-    const response = await axios.get(resUrl);
-    return response.data.records;
+    const qryURL="http://happy-village.org/depo/dapi.php";
+    const payload={ "query" : "SELECT S.* from pm5_users U join pm5_push_subscriptions S ON U.id=S.user_id where U.push_enabled=1" };
+    const response = await axios.post(qryURL,payload);
+    return response.data;
 }
 
 

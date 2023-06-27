@@ -1,5 +1,6 @@
-import WebPush from 'web-push'
-import { subscribeUser} from '../../../libs/pm5-client'
+import WebPush from 'web-push';
+import { subscribeUser} from '../../../libs/pm5-client';
+import { nanoid } from 'nanoid';
 
 
 const currentVercelURL = process.env.VERCEL
@@ -19,7 +20,7 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
 
     const payload = JSON.parse(req.body);
-    payload.device=device;
+    payload.device_id=nanoid(10);
     await subscribeUser(payload);
     console.log('New user has subscribed!', payload);
     res.status(201).json({payload});

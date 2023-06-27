@@ -1,9 +1,22 @@
-import { getUserInfo} from '../../../libs/pm5-client'
+import { getUserInfo,saveUserInfo} from '../../../libs/pm5-client'
 
 export default async (req, res) => {
   try {
+    const query = req.query;
+    const { userId } = query;
 
-    const userInfo=await getUserInfo('add223231');
+    const payload = JSON.parse(req.body);
+    console.log(payload)
+    console.log(req.method)
+
+    if(req.method==="PUT"){
+      
+      const userInfo=await getUserInfo(userId);
+      userInfo.push_enabled=payload.push_enabled;
+      await saveUserInfo(userId,userInfo)
+      
+    }
+//    
     res.status(200).json({status:"ok" ,userInfo});
   } catch (error) {
     // // Handle any errors that occur during the request

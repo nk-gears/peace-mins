@@ -50,7 +50,14 @@ Content-Type: application/json
 POST http://happy-village.org/depo/dapi.php
 Content-Type: application/json
 
-{ "query" : "SELECT * from pm5_users " }
+{ "query" : "SELECT S.* from pm5_users U join pm5_push_subscriptions S ON U.id=S.user_id where U.push_enabled=1" }
+
+### PUSH
+
+POST https://peace-mins-util.vercel.app/api/pub
+Content-Type: application/json
+
+{"message":{"title":"108 Days - Peace Minutes","timestamp":"2023-06-25T06:35:00.620Z","body":"It''s Time to Mark your Minutes","icon":"/android-chrome-192x192.png","actions":[{"action":"Button one","title":"Button one text"},{"action":"Button two","title":"Button two text"}]}}
 
 
 ### ORIG API

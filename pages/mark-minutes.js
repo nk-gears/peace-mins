@@ -27,7 +27,7 @@ const MarkMinutes = () => {
   const isBrowser = () => typeof window !== 'undefined';
   let worker
 
-  const requestNotification= (userInfo)=>{
+  const requestNotification= (_userInfo)=>{
 
 if (isBrowser()) {
   worker = navigator.serviceWorker
@@ -52,9 +52,10 @@ if (isBrowser()) {
           })
         }
         const tzOffset=(new Date()).getTimezoneOffset();
+        console.log(userInfo);
         await fetch('/api/sub', {
           method: 'POST',
-          body: JSON.stringify({tzOffset:tzOffset,userId:userInfo.id, subscription })
+          body: JSON.stringify({tzOffset:tzOffset,userId:_userInfo.id, subscription })
         })
       })
   }
@@ -70,7 +71,7 @@ if (isBrowser()) {
       if(_userInfo){
        setIsRegistered(true);
        setUserInfo(JSON.parse(_userInfo));
-       requestNotification(_userInfo);
+       requestNotification(JSON.parse(_userInfo));
       }
      }
   
