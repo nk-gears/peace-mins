@@ -1,9 +1,9 @@
 
 
 web-push send-notification  \
---endpoint=https://fcm.googleapis.com/fcm/send/dXWW2cSx64c:APA91bEHjKWBbIKJBSybujgyttaG9iwvdH-u6j0zqQCeZdo1aFdy3PozJnt4pZ0SMs1kh-lxtyDMmjKLR_840xkF03bij7EMx1dVDXZHVOobtGJ7V2kg2IWQwQ3kJPj-UIFsypUC2McP \
---key=BF_hNdkx1za0slg42fu5rpQAlRH_OAlJ8Mj6A18akHyed8NiStIjL0qo43Cjcltld5G72S7E8i3mkW3RjmeTUTk \
---auth=Ss3-2fSuKmG-slt0OxhrgA \
+--endpoint=https://fcm.googleapis.com/fcm/send/cdj1t51zGMc:APA91bFZEmhhzMgq0nkrgWZMespfm22QE1NjsLbWRq_B_5LrB6THtrKBafyJCg48QNEQnI03D7AK4jlXEKqTyZr2UZQixFHpb1-E4MutggV-PgQe-n3soqiGxWVN80X-J-XwtgmTwW5d \
+--key=BDpNX92Xpq2KFXfRT22jVigX7Q23tgs11rlX13qVHRnZFiKsEYBbunyk5WeccIXzsy10gROyzzeJq2HYhrTJMgM \
+--auth=qmpfjjuSMkLvJTVJJKKwPA \
 --vapid-subject=https://peace-mins-util.vercel.app \
 --vapid-pubkey=BFZ-dGxNqg0A15IIR2-XAxn0wUKyVID9uoMuBgifai_P4eNGTNFMjS2_ly99v_WNr_4ev_5Rqb5-SU99q2Ari4o \
 --vapid-pvtkey=XELyGjIvBX1NQPfBckaao8tRsmRzkleRvzbaWZgIGRw \

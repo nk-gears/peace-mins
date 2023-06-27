@@ -1,21 +1,4 @@
-// const processData = () => {
-  const mockData = {
-    title: "Sample",
-    body: "body",
-    content: "Simple Content for ever",
-    timestamp: "2023-06-25T06:35:00.620Z",
-    icon: "/android-chrome-192x192.png",
-  };
 
-  self.registration.showNotification(data.message.title, {
-    body: data.message.body,
-    icon: data.message.icon,
-    actions: [
-      { action: "Button one", title: "Button one text" },
-      { action: "Button two", title: "Button two text" },
-    ],
-  });
-// };
 
 self.addEventListener("push", function onPush(event) {
   const pushContent = event.data?.text() ?? ''

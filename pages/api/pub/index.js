@@ -13,14 +13,16 @@ WebPush.setVapidDetails(
 
 export default async function handler(req, res) {
   const subUsers = await getSubscribedUsers();
-  const payload = JSON.parse(req.body);
+  const payload = req.body;
   for (const userSub of subUsers) {
     if (userSub.subscription) {
       const subscription = JSON.parse(userSub.subscription);
       try {
         WebPush.sendNotification(subscription, JSON.stringify(payload));
+        console.log("sent to " + userSub.id);
       } catch (ex) {
-        console.log(ex);
+        console.log(ex.message);
+        console.log("failed to sent to " + userSub.id);
       }
     }
   }
