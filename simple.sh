@@ -1,11 +1,11 @@
 
 
 web-push send-notification  \
---endpoint=https://fcm.googleapis.com/fcm/send/cdj1t51zGMc:APA91bFZEmhhzMgq0nkrgWZMespfm22QE1NjsLbWRq_B_5LrB6THtrKBafyJCg48QNEQnI03D7AK4jlXEKqTyZr2UZQixFHpb1-E4MutggV-PgQe-n3soqiGxWVN80X-J-XwtgmTwW5d \
---key=BDpNX92Xpq2KFXfRT22jVigX7Q23tgs11rlX13qVHRnZFiKsEYBbunyk5WeccIXzsy10gROyzzeJq2HYhrTJMgM \
---auth=qmpfjjuSMkLvJTVJJKKwPA \
---vapid-subject=https://peace-mins-util.vercel.app \
+--endpoint=https://fcm.googleapis.com/fcm/send/eBZrTnt5FX8:APA91bEVqvQmlQSoxTVIBA9b6lfTpyRsphr-2PIKbyIF66wUr0-LOEkTAJ6Sjz_nHGr_aU-S_hKiY-3qxcCmtRS3T-I3p2Ht5IJCsG5Nz1aaz2eIRUSmSP3T9nE63i2QnEhjsiGgA7n2 \
+--key=BGLpgw10-Dy5dvae5f_ztEGF3tdncnl2pV07ijU9Fvc762IuvdTlaok3ZiZ_XTa0p6DEj8Wg-BMST-rDXLxD2Wc \
+--auth=a2SJmCbx6qj_RQs09tB1dQ \
+--vapid-subject=https://peaceminutes.org \
 --vapid-pubkey=BFZ-dGxNqg0A15IIR2-XAxn0wUKyVID9uoMuBgifai_P4eNGTNFMjS2_ly99v_WNr_4ev_5Rqb5-SU99q2Ari4o \
 --vapid-pvtkey=XELyGjIvBX1NQPfBckaao8tRsmRzkleRvzbaWZgIGRw \
---payload='{"message":{"title":"108 Days - Peace Minutes","timestamp":"2023-06-25T06:35:00.620Z","body":"It''s Time to Mark your Minutes","icon":"/android-chrome-192x192.png","actions":[{"action":"Button one","title":"Button one text"},{"action":"Button two","title":"Button two text"}]}}'
+--payload='{"message":{"title":"108 Days - Peace Minutes","timestamp":"2023-06-26T06:35:00.620Z","body":"It''s Time to Mark your Minutes","icon":"/android-chrome-192x192.png"}}'
 

@@ -20,7 +20,7 @@ self.addEventListener("push", function onPush(event) {
 
 const processAction= (action)=>{
   if(action){
-    clients.openWindow('/my-peace-minutes');
+    clients.openWindow('/my-peace-mins');
   }else{
     clients.openWindow('/'+action);
   }
