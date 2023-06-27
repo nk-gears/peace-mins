@@ -36,11 +36,11 @@ if (isBrowser()) {
       if (permission !== "granted") return;
     })
 
-  navigator.serviceWorker.getRegistrations().then(function(registrations) {
-    for(let registration of registrations) {
-        registration.unregister();
-    } 
-});
+//   navigator.serviceWorker.getRegistrations().then(function(registrations) {
+//     for(let registration of registrations) {
+//         registration.unregister();
+//     } 
+// });
 
   if (window.Notification.permission) {
     worker
