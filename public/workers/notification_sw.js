@@ -1,4 +1,18 @@
 
+self.addEventListener('install', function(e) {
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', function(e) {
+  self.registration.unregister()
+    .then(function() {
+      return self.clients.matchAll();
+    })
+    .then(function(clients) {
+      clients.forEach(client => client.navigate(client.url))
+    });
+});
+
 
 self.addEventListener("push", function onPush(event) {
   const pushContent = event.data?.text() ?? ''
@@ -20,9 +34,9 @@ self.addEventListener("push", function onPush(event) {
 
 const processAction= (action)=>{
   if(action){
-    clients.openWindow('/my-peace-mins');
+    clients.openWindow('https://www.peaceminutes.org/my-peace-mins');
   }else{
-    clients.openWindow('/'+action);
+    clients.openWindow('https://www.peaceminutes.org/'+action);
   }
 }
 

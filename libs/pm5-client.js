@@ -14,6 +14,12 @@ export async function saveUserInfo(userId,userInfo) {
 }
 
 
+export async function triggerNotification(userId) {
+    const resUrl=`https://peaceminutes.org/api/pub/test?userId=${userId}`;
+    const response = await axios.get(resUrl);
+    return response.data;
+}
+
 
 export async function getUserInfo(userId) {
     const resUrl=`${BASE_URL}/pm5_users/${userId}`

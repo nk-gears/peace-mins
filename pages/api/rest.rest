@@ -58,7 +58,14 @@ POST https://peaceminutes.org/api/pub
 #POST http://localhost:3000/api/pub
 Content-Type: application/json
 
-{"message":{"title":"108 Days - Peace Minutes","timestamp":"2023-06-25T06:35:00.620Z","body":"It''s Time to Mark your Minutes","icon":"/android-chrome-192x192.png","actions":[{"action":"Button one","title":"Button one text"},{"action":"Button two","title":"Button two text"}]}}
+{"message":{"title":"1082ays - Peace Minutes","timestamp":"2023-06-25T06:35:00.620Z","body":"It''s Time to Mark your Minutes","icon":"/android-chrome-192x192.png","actions":[{"action":"Button one","title":"Button one text"},{"action":"Button two","title":"Button two text"}]}}
+
+
+
+### USER API
+
+GET http://happy-village.org/depo/api.php/records/pm5_users/zxdtTSmB5b
+Content-Type: application/json
 
 
 ### ORIG API

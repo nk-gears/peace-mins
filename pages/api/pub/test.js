@@ -11,13 +11,16 @@ WebPush.setVapidDetails(
 )
 
 
-export  default async function POST(req,res) {
+
+export default async function GET(req,res) {
   const subUsers = await getSubscribedUsers();
-  const payload = req.body;
-  console.log(payload);
-  
+  const ts=(new Date()).toISOString();
+  const payload={"message":{"title":"108 Days - Peace Minutes","timestamp":ts,"body":"It''s Time to Mark your Minutes","icon":"/android-chrome-192x192.png"}};
+  const query = req.query;
+  const { userId } = query;
+
   for (const userSub of subUsers) {
-    if (userSub.subscription) {
+    if (userSub.subscription && userSub.user_id==userId) {
       const subscription = JSON.parse(userSub.subscription);
       try {
         WebPush.sendNotification(subscription, JSON.stringify(payload)).catch(err => console.log(err));

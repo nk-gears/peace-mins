@@ -1,4 +1,4 @@
-import { getUserInfo,saveUserInfo} from '../../../libs/pm5-client'
+import { getUserInfo,saveUserInfo,triggerNotification} from '../../../libs/pm5-client'
 
 export default async (req, res) => {
   try {
@@ -13,8 +13,10 @@ export default async (req, res) => {
       
       const userInfo=await getUserInfo(userId);
       userInfo.push_enabled=payload.push_enabled;
-      await saveUserInfo(userId,userInfo)
-      
+      await saveUserInfo(userId,userInfo);
+      if(payload.push_enabled===1){
+        await triggerNotification(userId);
+      }
     }
 //    
     res.status(200).json({status:"ok" ,userInfo});
