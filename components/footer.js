@@ -16,6 +16,12 @@ export default function Footer() {
     }
 
   ];
+
+  const changeLang=(event)=>{
+      event.preventDefault();
+      location.href="/";
+
+  }
   const legal = [];//"Terms", "Privacy", "Legal"];
   return (
     <div className="relative">
@@ -36,6 +42,10 @@ export default function Footer() {
                     {item.title}
                 </Link>
               ))}
+
+              <Link key={21}  onClick={changeLang} href="javascript:;" className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">                 
+                  change language
+                </Link>
             </div>
           </div>
           <div>
