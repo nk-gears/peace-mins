@@ -13,7 +13,14 @@ export default function Footer() {
     },
     {
       title:"resources",link:"/resources"
+    },
+    {
+      title:"english",link:"/?lang=en"
+    },
+    {
+      title:"தமிழ்",link:"/?lang=ta"
     }
+
 
   ];
 
@@ -38,14 +45,14 @@ export default function Footer() {
           <div>
             <div className="flex flex-wrap w-full -mt-2 -ml-3 lg:ml-0">
               {navigation.map((item, index) => (
-                <Link key={index} href={item.link} className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">                 
+                <Link key={index} href={item.link} className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-baseLink-500 focus:text-baseLink-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">                 
                     {item.title}
                 </Link>
               ))}
 
-              <Link key={21}  onClick={changeLang} href="javascript:;" className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-indigo-500 focus:text-indigo-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">                 
-                  change language
-                </Link>
+                {/* <Link key={21}  onClick={changeLang}   className="w-full px-4 py-2 text-gray-500 rounded-md dark:text-gray-300 hover:text-baseLink-500 focus:text-baseLink-500 focus:bg-indigo-100 focus:outline-none dark:focus:bg-trueGray-700">                 
+                    change language
+                  </Link> */}
             </div>
           </div>
           <div>

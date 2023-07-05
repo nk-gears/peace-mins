@@ -7,6 +7,7 @@ const HeadFav = () => {
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest"></link>
         <meta property="og:url" content="https://peaceminutes.org" />
+        
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
@@ -18,6 +19,10 @@ const HeadFav = () => {
           content="An Unique Initiative by Brahma Kumaris to enhance global peace by fostering inner peace in individuals"
         />
         <meta property="og:image" content="https://peaceminutes.org/img/preview.jpg" />
+        <script
+    src="https://cdn.onesignal.com/sdks/OneSignalSDK.js"
+    async=""
+  ></script>
     </>
 );
 }

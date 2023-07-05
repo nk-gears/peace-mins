@@ -6,29 +6,49 @@ import { benefitOne, benefitTwo } from "../components/data";
 import Video from "../components/video";
 import Benefits from "../components/benefits";
 import Footer from "../components/footer";
+import { useRouter } from "next/router";
 import HeadFav from "../components/head-fav";
 import { useEffect, useState } from "react";
 import Container from "../components/container";
+import { UserLang_data } from "../context/context";
+import { useContext } from "react";
+import {homepage_en,homepage_ta } from "../components/content";
 
 const Home = () => {
-  const [userLang, setUserLang] = useState("100");
-  const [mounted, setMounted] = useState(false);
+  const router = useRouter();
 
+  const { userLanguage, setUserLanguage} = useContext(UserLang_data);
+  const [mounted, setMounted] = useState(false);
+  const [content, setContent] = useState(homepage_en);
+  
   // When mounted on client, now we can show the UI
+  const saveUserLang=(langName)=>{
+    window.localStorage.setItem("userLang",langName);
+    setUserLanguage(langName);
+  }
   useEffect(() => {
     setMounted(true);
 
-    const _userLang = window.localStorage.getItem("userLang") || "100";
-    if (_userLang != "") {
-      setUserLang(_userLang);
-    }
-  }, []);
+    let _userLang = window.localStorage.getItem("userLang") || "100";
+
+    if(router.query.lang){
+      _userLang=router.query.lang
+      window.localStorage.setItem("userLang",router.query.lang);
+    } 
+      if(_userLang=="ta")
+         setContent(homepage_ta)
+        else
+        setContent(homepage_en)
+      setUserLanguage(_userLang);
+   
+  }, [userLanguage]);
 
   if (!mounted) return null;
 
   return (
     <>
       <Head>
+        
         <HeadFav />
         <title>5 mins for Peace</title>
         <meta name="description" content="5 mins for Peace" />
@@ -37,13 +57,14 @@ const Home = () => {
 
       <Navbar />
 
-      {userLang == "100" && (
+      {userLanguage == "100" && (
         <Container className="flex flex-wrap m-auto">
+
           <div className="flex items-center w-full m-auto lg:w-1/2">
             <div class="inline-flex shadow-sm rounded-md m-auto" role="group">
               <button
                 type="button" onClick={()=>{
-                  setUserLang('ta');
+                  saveUserLang('ta');
                 }}
                 class="rounded-l-lg border border-gray-200 bg-white text-sm font-medium px-4 py-2 text-gray-900 hover:bg-indigo-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 inline-flex items-center "
               >
@@ -51,7 +72,7 @@ const Home = () => {
                தமிழ்
               </button>
               <button  onClick={()=>{
-                  setUserLang('en');
+                  saveUserLang('en');
                 }}
                 type="button"
                 class="rounded-r-md border border-gray-200 bg-white text-sm font-medium px-4 py-2 text-gray-900 hover:bg-indigo-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 inline-flex items-center"
@@ -61,16 +82,18 @@ const Home = () => {
               </button>
             
             </div>
+            
           </div>
         </Container>
       )}
+ 
 
-      {userLang == "en" && (
+      {userLanguage != "100" && (
         <>
           <Hero />
 
-          <Benefits data={benefitOne} />
-          <Benefits imgPos="right" data={benefitTwo} />
+          <Benefits data={{...benefitTwo,title:content.tagline, desc:content.hero_top_right + content.hero_right_bottom}} />
+          <Benefits imgPos="right" data={{...benefitOne,title:content.objective, desc:content.hero_top_left + content.hero_right_bottom}} />
           <SectionTitle
             pretitle=""
             title="Good Wishes from Seniors - Yoga Day 2023"
@@ -80,20 +103,7 @@ const Home = () => {
         </>
       )}
 
-      {userLang == "ta" && (
-        <>
-          <Hero />
-
-          <Benefits data={benefitOne} />
-          <Benefits imgPos="right" data={benefitTwo} />
-          <SectionTitle
-            pretitle=""
-            title="Good Wishes from Seniors - Yoga Day 2023"
-          ></SectionTitle>
-          <Video />
-          <Footer />
-        </>
-      )}
+       
 
       {/* <Cta /> */}
     </>

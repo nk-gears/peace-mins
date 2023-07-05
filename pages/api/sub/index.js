@@ -2,7 +2,7 @@ import WebPush from 'web-push';
 import { subscribeUser} from '../../../libs/pm5-client';
 import { nanoid } from 'nanoid';
 
-const currentVercelURL = "https://peaceminutes.org";
+const currentVercelURL = process.env.VERCEL_URL
 
 WebPush.setVapidDetails(
   currentVercelURL ,

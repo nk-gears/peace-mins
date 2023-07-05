@@ -6,8 +6,9 @@ export default async (req, res) => {
     const { userId } = query;
 
     const payload = JSON.parse(req.body);
-    console.log(payload)
-    console.log(req.method)
+    // console.log(payload)
+    // console.log(req.method)
+    console.log(process.env.PRIVATE_NOTIFICATION_KEY);
 
     if(req.method==="PUT"){
       
@@ -15,7 +16,7 @@ export default async (req, res) => {
       userInfo.push_enabled=payload.push_enabled;
       await saveUserInfo(userId,userInfo);
       if(payload.push_enabled===1){
-        await triggerNotification(userId);
+       // await triggerNotification(userId);
       }
     }
 //    

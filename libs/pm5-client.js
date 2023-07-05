@@ -15,7 +15,7 @@ export async function saveUserInfo(userId,userInfo) {
 
 
 export async function triggerNotification(userId) {
-    const resUrl=`https://peaceminutes.org/api/pub/test?userId=${userId}`;
+    const resUrl=`https://peacemins.nkdews.me/api/pub/test?userId=${userId}`;
     const response = await axios.get(resUrl);
     return response.data;
 }
@@ -43,6 +43,7 @@ export async function subscribeUser(payload) {
     subInfo.user_id=payload.userId;
     subInfo.subscription=JSON.stringify(payload.subscription);
     subInfo.technology='webpush';
+    console.log(subInfo);
     const response = await axios.post(resUrl,subInfo);
     return response.data;
 }

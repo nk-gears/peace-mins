@@ -2,13 +2,20 @@ import Image from "next/image";
 import Container from "./container";
 import heroImg from "../public/img/feature3.png";
 import { useState,useEffect } from "react";
+import { useContext } from "react";
+import {homepage_en,homepage_ta } from "../components/content";
+import { UserLang_data } from "../context/context";
+import { useRouter } from "next/router";
+
+
 const Hero = () => {
 
 
-
+  const { userLanguage, setUserLanguage} = useContext(UserLang_data);
+  const [content, setContent] = useState(homepage_en);
   const [mounted, setMounted] = useState(false);
   const [isRegistered,setIsRegistered]=useState(false);
-
+  const router = useRouter();
   useEffect(() => {setMounted(true);
   
     if (typeof window !== "undefined" && window.localStorage) { 
@@ -17,9 +24,19 @@ const Hero = () => {
       if(userInfo){
        setIsRegistered(true);
       }
+      if(router.query.lang){
+        const _userLang=router.query.lang
+        window.localStorage.setItem("userLang",router.query.lang);
+        setUserLanguage(_userLang);
+      } 
+
      }
+     if(userLanguage=="ta")
+         setContent(homepage_ta)
+        else
+        setContent(homepage_en)
   
-  }, []);
+  }, [userLanguage]);
 
   if (!mounted) return null;
   return (
@@ -29,12 +46,11 @@ const Hero = () => {
           <div className="max-w-2xl mb-8">
 
             <h1 className="text-4xl font-bold leading-snug tracking-tight text-gray-800 lg:text-4xl lg:leading-tight xl:text-6xl xl:leading-tight dark:text-white">
-            Discover the Power of <span className="text-brandBase"> `5 Minutes` </span>for building a <span className="text-brandBase">Peaceful world</span>
+            {content.title}  <span className="text-brandBase"> `{content.objective} ` </span> <span className="text-brandBase"></span>
 
             </h1>
-            <p className="py-5 text-xl leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
-            The campaign aims to raise awareness about the benefits of meditation and encourage participants to incorporate five minutes of daily meditation into their routines.
-            </p>
+            <p className="py-5 text-xl text-justify leading-normal text-gray-500 lg:text-xl xl:text-2xl dark:text-gray-300">
+{content.page2_top}            </p>
 
           { isRegistered===false &&
             <div className="flex flex-col items-start space-y-3 sm:space-x-4 sm:space-y-0 sm:items-center sm:flex-row">
@@ -42,9 +58,8 @@ const Hero = () => {
                 href="/register"
                 target="_blank"
                 rel="noopener"
-                className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md ">
-                Register & Participate Now
-              </a>
+                className="px-8 py-4 text-lg font-medium text-center text-white bg-buttonBase-500 rounded-md ">
+{content.registerCaption}              </a>
             
             </div>
              }
@@ -54,8 +69,8 @@ const Hero = () => {
                 href="/mark-minutes"
                 target="_blank"
                 rel="noopener"
-                className="px-8 py-4 text-lg font-medium text-center text-white bg-indigo-600 rounded-md ">
-                Mark my 'Peace Minutes'
+                className="px-8 py-4 text-lg font-medium text-center text-white bg-buttonBase-500 rounded-md ">
+                {content.buttonTitle}
               </a>
             
             </div>
@@ -80,7 +95,7 @@ const Hero = () => {
       <Container>
         {/* <div className="flex flex-col justify-center">
           <div className="text-xl text-center text-gray-700 dark:text-white">
-            Trusted by <span className="text-indigo-600">2000+</span>{" "}
+            Trusted by <span className="text-baseLink-600">2000+</span>{" "}
             customers worldwide
           </div>
 

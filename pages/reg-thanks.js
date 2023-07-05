@@ -32,19 +32,19 @@ const RegThanks = () => {
           <p className="mb-4 font-light">
             Checkout the following links
          </p>
-          <a href="/resources" className="py-4 inline-flex items-center font-medium text-indigo-600 hover:text-indigo-800 dark:text-indigo-500 dark:hover:text-indigo-700">
+          <a href="/resources" className="py-4 inline-flex items-center font-medium text-baseLink-600 hover:text-baseLink-800 dark:text-baseLink-500 dark:hover:text-baseLink-700">
               Guided Video/Audio Resources
               <svg className="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
           </a>
-          <a href="/mark-minutes" className="py-4 inline-flex items-center font-medium text-indigo-600 hover:text-indigo-800 dark:text-indigo-500 dark:hover:text-indigo-700">
+          <a href="/mark-minutes" className="py-4 inline-flex items-center font-medium text-baseLink-600 hover:text-baseLink-800 dark:text-baseLink-500 dark:hover:text-baseLink-700">
               Start Marking your Peace Minutes 
               <svg className="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
           </a>
-          <a href="/my-peace-mins" className="py-4 inline-flex items-center font-medium text-indigo-600 hover:text-indigo-800 dark:text-indigo-500 dark:hover:text-indigo-700">
+          <a href="/my-peace-mins" className="py-4 inline-flex items-center font-medium text-baseLink-600 hover:text-baseLink-800 dark:text-baseLink-500 dark:hover:text-baseLink-700">
               My Peace Minutes
               <svg className="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
           </a>
-          <a href="/global-minutes" className="py-4 inline-flex items-center font-medium text-indigo-600 hover:text-indigo-800 dark:text-indigo-500 dark:hover:text-indigo-700">
+          <a href="/global-minutes" className="py-4 inline-flex items-center font-medium text-baseLink-600 hover:text-baseLink-800 dark:text-baseLink-500 dark:hover:text-baseLink-700">
               Global Peace Minutes
               <svg className="ml-1 w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path></svg>
           </a>
