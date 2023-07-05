@@ -3,13 +3,21 @@ const homepage_en={
   "registerCaption":"Register & Participate Now",
   "buttonTitle":"Mark my Peace Minutes",
   "title":"5 Minutes for Peace",
+  "objective_1":"Just Add Meditation",
+  "objective_2":"To your Life...",
   "tagline":"தியானம் – தினசரி முன்னேற்றம்",
   "hero_main":"We all know that doing meditation helps us to get peace of mind. But the trick is in practising it DAILY. Here is a new tool that will help you to do meditation as a daily habit.",
-  "hero_top_right":"தினசரி 5 நிமிடங்கள் தியானம் செய்வதனால் மன அமைதியையும் நேர்மறையான சிந்தனையையும் வளர்க்க முடியும்",
-  "hero_top_left":`அன்றாடம் தியானம் செய்ய விரும்பும் உங்களுக்கு பிரம்மா குமாரிகள் இப்புதிய திட்டம் மிகவும் உதவிகரமாக இருக்கும்.
-  தனி மனித மன அமைதியின் மூலம் உலகத்தில் அமைதியான வாயுமண்டலத்தை அதிகரிப்பதே இதன் நோக்கமாகும்`,
-  "hero_right_bottom":`தினசரி 5 நிமிடம் தியானத்தில் அமருங்கள். எப்பொழுது பயிற்சி செய்தீர்கள் என்பதை பதிவு செய்யுங்கள். தினசரி தியான பயிற்சி செய்யும் ஒரு மிகபெரிய சமுகத்தில் 
-  இணைந்து செய்வது உங்களுக்கு மிகவும் உதவியாக இருக்கும்.`,
+  "hero_top_right":`By allocating a minimum of
+  minutes every day to create
+  positive thoughts we can
+  nurture inner peace and
+  positive mindset`,
+  "hero_top_left":`Just spend 5 minutes daily and
+  Register it in online. Join with
+  the larger community that
+  practices meditation regularly.`,
+  "hero_right_bottom":`This project is a new initiative of Brahma Kumaris, helping you to practise meditation daily. The aim is to enhance global peace by fostering inner peace in individuals. 
+  Om Shanti`,
   "objective":"Just Add Meditation to your life",
   "page2_top":"This aims to help individuals realize their responsibility in increasing world peace by maintaining a calm and peaceful state of mind. By dedicating at least 5 minutes each day to generating positive thoughts, individuals can cultivate inner peace and contribute to global harmony.",
   "section_1":"Why this project?",
@@ -45,13 +53,15 @@ const homepage_ta={
     "buttonTitle":"என் நிமிடங்களைக் குறிக்கவும்",
     "title":"5 நிமிடங்கள் அமைதிக்காக",
     "hero_main":"தியானம் செய்வது மன அமைதியைப் பெற உதவும் என்பதை நாம் அனைவரும் அறிவோம். ஆனால் அதை தின தினசரி பழக்கமாக்குவது கடினமாக உள்ளது. இத்திட்டம் தியானத்தை தினசரி பழக்கமாக மாற்ற உதவும்.",
-    "hero_top_right":"தினசரி 5 நிமிடங்கள் தியானம் செய்வதனால் மன அமைதியையும் நேர்மறையான சிந்தனையையும் வளர்க்க முடியும்",
+    "hero_top_right":"தினசரி 5 நிமிடங்கள் தியானம் செய்வதனால் மன அமைதியையும் நேர்மறையான சிந்தனையையும் வளர்க்க முடியும். ",
     "hero_top_left":`அன்றாடம் தியானம் செய்ய விரும்பும் உங்களுக்கு பிரம்மா குமாரிகள் இப்புதிய திட்டம் மிகவும் உதவிகரமாக இருக்கும்.
-    தனி மனித மன அமைதியின் மூலம் உலகத்தில் அமைதியான வாயுமண்டலத்தை அதிகரிப்பதே இதன் நோக்கமாகும்`,
+    தனி மனித மன அமைதியின் மூலம் உலகத்தில் அமைதியான வாயுமண்டலத்தை அதிகரிப்பதே இதன் நோக்கமாகும். `,
     "hero_right_bottom":`தினசரி 5 நிமிடம் தியானத்தில் அமருங்கள். எப்பொழுது பயிற்சி செய்தீர்கள் என்பதை பதிவு செய்யுங்கள். தினசரி தியான பயிற்சி செய்யும் ஒரு மிகபெரிய சமுகத்தில் 
     இணைந்து செய்வது உங்களுக்கு மிகவும் உதவியாக இருக்கும்.`,
     "tagline":"தியானம் – தினசரி முன்னேற்றம்",
     "objective":"தியானத்தை தினசரி பழக்கமாக்குவோம்",
+    "objective_1":"தியானத்தை",
+    "objective_2":"தினசரி பழக்கமாக்குவோம் !.",
     "page2_top":"அமைதியான மனநிலையைப் பேணுவதன் மூலம் உலக அமைதியை அதிகரிப்பதில் தனிநபர்கள் தன்னுடைய பொறுப்பை உணர உதவுவதே இதன் நோக்கமாகும். நேர்மறையான எண்ணங்களை உருவாக்க ஒவ்வொரு நாளும் குறைந்தது 5 நிமிடங்களை அர்ப்பணிப்பதன் மூலம், தனிநபர் தன் மன அமைதியை வளர்த்து, உலக அமைதி மற்றும் நல்லிணக்கத்திற்கு பங்களிக்க முடியும்.",
     "section_1":"ஏன் இந்த திட்டம் ?",
     "section_2":"இதை எப்படி செய்யப் போகிறோம்?",

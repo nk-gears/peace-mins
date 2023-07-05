@@ -2,8 +2,9 @@ import Head from "next/head";
 import Hero from "../components/hero";
 import Navbar from "../components/navbar";
 import SectionTitle from "../components/sectionTitle";
+import Image from "next/image";
 import { benefitOne, benefitTwo } from "../components/data";
-import Video from "../components/video";
+import PeaceObjectives  from "../components/peaceObjective";
 import Benefits from "../components/benefits";
 import Footer from "../components/footer";
 import { useRouter } from "next/router";
@@ -92,13 +93,27 @@ const Home = () => {
         <>
           <Hero />
 
-          <Benefits data={{...benefitTwo,title:content.tagline, desc:content.hero_top_right + content.hero_right_bottom}} />
-          <Benefits imgPos="right" data={{...benefitOne,title:content.objective, desc:content.hero_top_left + content.hero_right_bottom}} />
-          <SectionTitle
+          <Benefits data={{...benefitTwo,title:content.title, desc:content.hero_right_bottom }} />
+          <Benefits imgPos="right" data={{...benefitOne,title:content.objective, desc:content.hero_top_left + content.hero_top_right}} />
+          <Container>
+      <div className="grid lg:grid-cols-2 xl:grid-cols-3">
+      <Image
+                src="/img/brand-logo-bird.png"
+                alt="N"
+                width="300"
+                height="300"
+                className="animate-bounce w-12 align-left"
+              />
+          {content.page2_top}
+          </div>
+          </Container>
+
+          <PeaceObjectives content={content}/>
+          {/* <SectionTitle
             pretitle=""
             title="Good Wishes from Seniors - Yoga Day 2023"
-          ></SectionTitle>
-          <Video />
+          ></SectionTitle> */}
+          {/* <Video /> */}
           <Footer />
         </>
       )}

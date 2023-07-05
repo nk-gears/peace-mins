@@ -21,6 +21,7 @@ module.exports = {
         },
         brandBase: "#2E599A",
         primary: {
+          
           100: "#E6F6FE",
           200: "#C0EAFC",
           300: "#9ADDFB",

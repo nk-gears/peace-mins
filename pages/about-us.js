@@ -26,8 +26,20 @@ const AboutUs = () => {
         title="About Brahma Kumaris">
       <div className="text-left">
       The Brahma Kumaris is a worldwide organisation dedicated to personal transformation and world renewal through the power of meditation. It has an ongoing interest in developing programs that empower the individual. Originally founded in India in 1937, there are one million students world-wide across 110 countries.
+      <p><b></b></p>
+    <p><b>Organizers</b></p>
+    <p>Prajapita Brahma Kumaris Ishwariya Vishwa Vidyalaya</p>
+    <p> Zonal HQ : “Shanti Dham” Q-96, 3rd Avenue, Anna Nagar, Chennai, Tamil Nadu, India. </p>
+    <p> Intl. HQ : Pandav Bhawan, Mount Abu, Rajasthan </p>
+  
+  
+    <p> பிரஜாபிதா பிரம்மா குமாரிகள் ஈஸ்வரிய விஷ்வ வித்யாலயா</p>
+    <p> மண்டல தலைமையகம்: “சாந்தி தாம்” Q-96, 3வது அவென்யூ, அண்ணா நகர், சென்னை, தமிழ்நாடு, இந்தியா.</p>
+    <p>உள்நாட்டில் தலைமையகம்: பாண்டவ் பவன், மவுண்ட் அபு, ராஜஸ்தான்</p>
+    <p>Website : <a className="text-indigo" href="https://brahmakumaris.com">brahmakumaris.com</a> </p>
+
       </div>
-      <a href="https://brahmakumaris.org.au/new/about-us/" target="_blank" >Visit the Official Site here</a>
+
       
       </SectionTitle>
  

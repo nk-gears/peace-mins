@@ -46,7 +46,7 @@ const Navbar = () => {
  
   const navigation = [
 
-   {title : "campaign",url:"/campaign"},
+   {title : "home",url:"/"},
    {title : "faq",url:"/faq"},
    {title : "about us",url:"/about-us"},
    {title : "resources",url:"/resources"},
@@ -68,7 +68,7 @@ const Navbar = () => {
                   <span className="flex items-center space-x-2 text-xl font-medium text-baseLink-500 dark:text-gray-100">
                     <span>
                       <Image
-                        src={"/img/brand-logo-" + userLanguage + ".png"}
+                        src={userLanguage=="100"?"/img/brand-logo-en.png":"/img/brand-logo-" + userLanguage + ".png"}
                         alt="N"
                         width="250"
                         height="100"
