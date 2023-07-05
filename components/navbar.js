@@ -26,10 +26,15 @@ const Navbar = () => {
       window.localStorage.setItem("userLang",router.query.lang);
       setUserLanguage(router.query.lang);
     } 
- 
+    
     if (typeof window !== "undefined" && window.localStorage) { 
+
+      const userLang=window.localStorage.getItem("userLang");
+      if(userLang=="en" || userLang=="ta"){
+        setUserLanguage(userLang);
+      }
+
       const userInfo=localStorage.getItem('userInfo');
-      console.log(userInfo);
       if(userInfo){
        setIsRegistered(true);
       }
@@ -58,6 +63,7 @@ const Navbar = () => {
 
   return (
     <div className="w-full">
+
       <nav className="container relative flex flex-wrap items-center justify-between p-8 mx-auto lg:justify-between xl:px-0">
         {/* Logo  */}
         <Disclosure>

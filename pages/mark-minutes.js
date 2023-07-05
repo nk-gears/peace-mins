@@ -91,7 +91,7 @@ const MarkMinutes = () => {
         setIsRegistered(true);
         setUserInfo(JSON.parse(_userInfo));
 
-   
+        try{
         window.OneSignal = window.OneSignal || [];
         OneSignal.push(function() {
           OneSignal.init({
@@ -101,7 +101,7 @@ const MarkMinutes = () => {
             notifyButton: {
               enable: true,
             },
-            notificationClickHandlerMatch: 'origin',
+    
             // addListenerForNotificationOpened:function(event){
             //   console.log("OneSignal notification clicked11:", event);
             // }
@@ -109,6 +109,10 @@ const MarkMinutes = () => {
 
 
         });
+      }
+      catch(ex){
+
+      }
 
         //requestNotification(JSON.parse(_userInfo));
       }

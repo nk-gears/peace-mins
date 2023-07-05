@@ -64,6 +64,8 @@ const MyPeaceMins = () => {
         router.push('/register');
       }
      };
+
+     try{
      window.OneSignal = window.OneSignal || [];
      OneSignal.push(function() {
        OneSignal.init({
@@ -78,6 +80,7 @@ const MyPeaceMins = () => {
            console.log("OneSignal notification clicked11:", event);
          }
        });
+     
 
       //  OneSignal.push(['addListenerForNotificationOpened', notificationData => {
       //    console.log('Received NotificationOpened:', notificationData);
@@ -85,7 +88,10 @@ const MyPeaceMins = () => {
       //  }]);
 
 
-     });
+     }); }
+     catch(ex){
+
+     }
   
   }, [remindUser]);
 

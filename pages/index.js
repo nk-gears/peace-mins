@@ -97,12 +97,13 @@ const Home = () => {
           <Benefits imgPos="right" data={{...benefitOne,title:content.objective, desc:content.hero_top_left + content.hero_top_right}} />
           <Container>
       <div className="grid lg:grid-cols-2 xl:grid-cols-3">
+        
       <Image
                 src="/img/brand-logo-bird.png"
                 alt="N"
                 width="300"
                 height="300"
-                className="animate-bounce w-12 align-left"
+                className="animate-bounce w-12 "
               />
           {content.page2_top}
           </div>
