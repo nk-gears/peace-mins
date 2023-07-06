@@ -101,20 +101,14 @@ const MarkMinutes = () => {
             notifyButton: {
               enable: true,
             },
-    
-            // addListenerForNotificationOpened:function(event){
-            //   console.log("OneSignal notification clicked11:", event);
-            // }
-          });
 
+          });
 
         });
       }
       catch(ex){
 
       }
-
-        //requestNotification(JSON.parse(_userInfo));
       }
     }
   }, [peaceTime]);

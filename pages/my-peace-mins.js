@@ -74,26 +74,15 @@ const MyPeaceMins = () => {
          safari_web_id: "web.onesignal.auto.0d6d1ede-d24a-45d0-ba73-2f88839c0735",
          notifyButton: {
            enable: true,
-         },
-         notificationClickHandlerMatch: 'origin',
-         addListenerForNotificationOpened:function(event){
-           console.log("OneSignal notification clicked11:", event);
          }
        });
      
-
-      //  OneSignal.push(['addListenerForNotificationOpened', notificationData => {
-      //    console.log('Received NotificationOpened:', notificationData);
-      //    notifListen();
-      //  }]);
-
-
      }); }
      catch(ex){
 
      }
   
-  }, [remindUser]);
+  }, []);
 
   if (!mounted) return null;
 
