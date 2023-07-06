@@ -4,11 +4,11 @@ import { getSubscribedUsers } from "../../../libs/pm5-client";
 
 const currentVercelURL = process.env.VERCEL_URL
 
-WebPush.setVapidDetails(
-  currentVercelURL,
-  process.env.PUBLIC_NOTIFICATION_KEY ?? '',
-  process.env.PRIVATE_NOTIFICATION_KEY ?? ''
-)
+// WebPush.setVapidDetails(
+//   currentVercelURL,
+//   process.env.PUBLIC_NOTIFICATION_KEY ?? '',
+//   process.env.PRIVATE_NOTIFICATION_KEY ?? ''
+// )
 
 
 let data = `{
@@ -17,6 +17,7 @@ let data = `{
 	"contents": {
 		"en": "It's time to mark your Peace Minutes"
 	},
+  "url":"https://www.peaceminutes.org/mark-minutes",
 	"included_segments": ["Subscribed Users"]
 
 }`;
