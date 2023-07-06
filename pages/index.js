@@ -99,14 +99,14 @@ const Home = () => {
 
 
 <div className="">
-          <div className="flex flex-col  w-full h-full px-8 rounded-2xl py-8 ">
+          <div className="flex flex-col  w-full h-full rounded-2xl  ">
           <p className="text-2xl  leading-normal "></p>
           <Image
                 src="/img/brand-logo-bird.png"
                 alt="N"
                 width="300"
                 height="300"
-                className="animate-bounce w-12 "
+                className="animate-bounce w-12  "
               />
             <p className="pl-3 pr-3 mb-2 text-brandBase bg-indigo-100 rounded-md ring-indigo-50 ring-4 dark:ring-indigo-900 dark:bg-indigo-900 dark:text-indigo-200 text-3xl py-4 text-lg leading-normal text-gray-900 lg:text-xl xl:text-xl dark:text-gray-900">
            
