@@ -15,32 +15,36 @@
   --foreground: black;
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   --background: white;
   --foreground: black;
 }
 
-li a {
-  text-decoration: none;
-  color:#888;
-  
+input:checked + label {
+  color: green !important;
+  font-weight: bold;
 }
 
-.timeit-wrapper-0-1-1 svg{
-  color:blue;
+li a {
+  text-decoration: none;
+  color: #888;
+}
+
+.timeit-wrapper-0-1-1 svg {
+  color: blue;
 }
 
 .required:after {
-  content:" *";
+  content: " *";
   color: red;
 }
 
 .segmented-control {
   display: inline-block;
-  border: 1px solid #4155FE;
+  border: 1px solid #4155fe;
   border-radius: 8px;
   overflow: hidden;
-  margin-top:3px;
+  margin-top: 3px;
 }
 .segmented-control__item {
   float: left;
@@ -55,7 +59,7 @@ li a {
   padding: 0.2em 4em;
   margin: -1px 0;
   border-left: 1px solid #ddd;
-  text-align: center;  
+  text-align: center;
   cursor: pointer;
   font-weight: bold;
 }
@@ -66,29 +70,30 @@ li a {
   background: #fafafa;
 }
 .segmented-control__input:checked + .segmented-control__label {
-  background: #4155FE;
-  color:#fff;
+  background: #4155fe;
+  color: #fff;
 }
 
 #box {
-  background:url(https://cdn.rawgit.com/ManzDev/cursos-assets/gh-pages/css3/earth-2.jpg);
-  background-size:cover;
-  border:2px solid #000;
-  border-radius:50%;
-  width:150px;
-  height:150px;
+  background: url(https://cdn.rawgit.com/ManzDev/cursos-assets/gh-pages/css3/earth-2.jpg);
+  background-size: cover;
+  border: 2px solid #000;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
   animation: movimiento 10s linear 0s infinite;
-  box-shadow:0 0 25px RGBA(255,255,255, 0.10),
-             -8px -8px 15px #000 inset,
-             2px 2px 25px #000 inset,
-             -45px -45px 25px RGBA(0,0,0, 0.5) inset, 
-             25px 25px 45px RGBA(0,0,0, 0.45) inset;
-  margin:1em auto;
-  transform:rotateX(6deg) rotateY(6deg) rotateZ(6deg);
+  box-shadow: 0 0 25px RGBA(255, 255, 255, 0.1), -8px -8px 15px #000 inset,
+    2px 2px 25px #000 inset, -45px -45px 25px RGBA(0, 0, 0, 0.5) inset,
+    25px 25px 45px RGBA(0, 0, 0, 0.45) inset;
+  margin: 1em auto;
+  transform: rotateX(6deg) rotateY(6deg) rotateZ(6deg);
 }
 
 @keyframes movimiento {
-  0% { background-position:0 0 }
-  100% { background-position:355px 0 }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 355px 0;
+  }
 }
-

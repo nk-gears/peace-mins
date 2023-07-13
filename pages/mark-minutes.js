@@ -1,11 +1,11 @@
 import Head from "next/head";
-import Navbar from "../components/navbar";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Footer from "../components/footer";
-import { useRouter } from "next/router";
+import Navbar from "../components/navbar";
 
-import HeadFav from "../components/head-fav";
 import Link from "next/link";
+import HeadFav from "../components/head-fav";
 
 const months = [
   "Jan",
@@ -22,50 +22,17 @@ const months = [
   "Dec",
 ];
 
-// const requestNotification = (_userInfo) => {
-
-//   const isBrowser = () => typeof window !== "undefined";
-//   if (isBrowser()) {
-//     window.Notification.requestPermission().then((permission) => {
-//       if (permission !== "granted") return;
-//     });
-
-//     if (window.Notification.permission) {
-
-//       const processSub=async ()=>{
-      
-//         const publicKey = await fetch("/api/sub").then((res) => res.json());
-
-//         navigator.serviceWorker.ready.then(async (worker) => {
-//           alert(worker)
-//           let subscription = await worker.pushManager.subscribe({
-//             applicationServerKey: publicKey.pubKey,
-//             userVisibleOnly: true,
-//           });
-//           const tzOffset = new Date().getTimezoneOffset();
-//           console.log(_userInfo);
-//           try{
-//           await fetch("/api/sub", {
-//             method: "POST",
-//             body: JSON.stringify({
-//               tzOffset: tzOffset,
-//               userId: _userInfo.id,
-//               subscription,
-//             }),
-//           });
-//         }catch(ex){
-//             console.log(ex);
-//         }
-
-//         });
-
-      
-//     }
-//     processSub();
-     
-//     }
-//   }
-// };
+const preDefinedTimeList = [
+  "04:00 AM",
+  "05:45 AM",
+  "07:00 AM",
+  "10:30 AM",
+  "12:00 PM",
+  "05:30 PM",
+  "07:30 PM",
+  "09:30 PM",
+  "10:00 PM",
+];
 
 const MarkMinutes = () => {
   const router = useRouter();
@@ -80,6 +47,7 @@ const MarkMinutes = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [userInfo, setUserInfo] = useState(true);
+  const [selectedTimes, setSelectedTimes] = useState([]);
 
   useEffect(() => {
     setMounted(true);
@@ -91,24 +59,20 @@ const MarkMinutes = () => {
         setIsRegistered(true);
         setUserInfo(JSON.parse(_userInfo));
 
-        try{
-        window.OneSignal = window.OneSignal || [];
-        OneSignal.push(function() {
-          OneSignal.init({
-            autoRegister: true,
-            appId: "7145473f-7782-4f88-a0d6-a5a81fda6092",
-            safari_web_id: "web.onesignal.auto.0d6d1ede-d24a-45d0-ba73-2f88839c0735",
-            notifyButton: {
-              enable: true,
-            },
-
+        try {
+          window.OneSignal = window.OneSignal || [];
+          OneSignal.push(function () {
+            OneSignal.init({
+              autoRegister: true,
+              appId: "7145473f-7782-4f88-a0d6-a5a81fda6092",
+              safari_web_id:
+                "web.onesignal.auto.0d6d1ede-d24a-45d0-ba73-2f88839c0735",
+              notifyButton: {
+                enable: true,
+              },
+            });
           });
-
-        });
-      }
-      catch(ex){
-
-      }
+        } catch (ex) {}
       }
     }
   }, [peaceTime]);
@@ -144,6 +108,24 @@ const MarkMinutes = () => {
     return [year, month, day].join("-");
   }
 
+  const savePeaceMinutesByItem = async (peaceTimeMins) => {
+    const actualData = {
+      user_id: userInfo.id,
+      event_date: Date.now() / 1000,
+      event_date_str: formatDate(Date.now()),
+      event_time: peaceTimeMins,
+      event_minutes: memberCount * 5,
+      event_members: memberCount,
+    };
+    return fetch("/api/peace-minutes", {
+      method: "POST",
+      body: JSON.stringify(actualData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  };
+
   const savePeaceMinutes = async () => {
     const actualData = {
       user_id: userInfo.id,
@@ -163,11 +145,26 @@ const MarkMinutes = () => {
   };
 
   const savePeaceTime = async (e) => {
-
     const response = await savePeaceMinutes();
     const jsonData = await response.json();
     //if(jsonData.peaceMinutes){
     router.push("/my-peace-mins");
+    //}
+  };
+
+  const savePeaceTimeMultiple = async (e) => {
+    for (let peaceMin of selectedTimes) {
+      try {
+        const response = await savePeaceMinutesByItem(peaceMin);
+        await response.json();
+      } catch (ex) {}
+      if (selectedTimes.length - 1 == selectedTimes.indexOf(peaceMin)) {
+        router.push("/my-peace-mins");
+      }
+    }
+
+    //if(jsonData.peaceMinutes){
+
     //}
   };
 
@@ -209,6 +206,34 @@ const MarkMinutes = () => {
     setPeaceTimeAMPM(selectedTime);
   };
 
+  const handleMultiTimePredefined = (event) => {
+    const selectedTime = event.target.value;
+    let finalItemSelected = "";
+    // console.log(selectedTime);
+    // console.log(event.target.checked);
+    let finalSelected = [...selectedTimes];
+
+    if (event.target.checked === false) {
+      const itemIndex = finalSelected.indexOf(selectedTime);
+      console.log(itemIndex);
+
+      finalSelected.splice(itemIndex, 1);
+
+      setSelectedTimes(Array.from(new Set([...finalSelected])));
+    } else {
+      setSelectedTimes([...finalSelected, selectedTime]);
+      finalItemSelected = selectedTime;
+    }
+
+    if (event.target.checked === true) {
+      const parts = selectedTime.split(" ");
+      if (finalItemSelected != "") {
+        setPeaceTime(parts[0]);
+        setPeaceTimeAMPM(parts[1]);
+      }
+    }
+  };
+
   return (
     <>
       <Head>
@@ -240,24 +265,27 @@ const MarkMinutes = () => {
           Select the Time in which you have remained in peace.
         </p>
       )}
-      <div className="flex justify-center items-center my-6">
-        <select
-          id="timePicker"
-          onChange={handleTimeChange}
-          className="text-3xl text-purple-900"
-          value={peaceTime}
-        >
-          {renderTimeOptions()}
-        </select>
-        <select
-          id="timePickerAMPM"
-          onChange={handleTimeAMPMChange}
-          className="text-3xl ml-4"
-          value={peaceTimeAMPM}
-        >
-          {renderTimeOptionsAMPM()}
-        </select>
-      </div>
+
+      {selectedTimes.length <= 1 && (
+        <div className="flex justify-center items-center my-6">
+          <select
+            id="timePicker"
+            onChange={handleTimeChange}
+            className="text-3xl text-purple-900"
+            value={peaceTime}
+          >
+            {renderTimeOptions()}
+          </select>
+          <select
+            id="timePickerAMPM"
+            onChange={handleTimeAMPMChange}
+            className="text-3xl ml-4"
+            value={peaceTimeAMPM}
+          >
+            {renderTimeOptionsAMPM()}
+          </select>
+        </div>
+      )}
       {userInfo && userInfo.user_type === 2 && (
         <div className="mb-1 mr-10 ml-10 m-auto">
           <label
@@ -284,14 +312,41 @@ const MarkMinutes = () => {
         </div>
       )}
 
-      <div className="block  flex justify-center items-center my-2"></div>
+      {selectedTimes.length > 1 && (
+        <div className="block  flex justify-center items-center my-2">
+          <div className="bg1-gray-800 border-2 border1-gray-900 shadow-2xl rounded-lg">
+            <ul className="p-6 text-gray-800 grid grid-cols-3 gap-3 text-sm">
+              {selectedTimes.map((item) => {
+                return (
+                  <li key={item} className=" text-buttonBase-500">
+                    <span className="font-bold text-red-500 pr-2">✓</span>
+                    {item}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      )}
+
       <div className="block  flex justify-center items-center my-4">
-        <button
-          onClick={savePeaceTime}
-          className="text-sm  bg-buttonBase-500 hover:bg-indigo-700 text-white font-bold py-1 px-8 rounded"
-        >
-          Submit
-        </button>
+        {selectedTimes.length <= 1 && (
+          <button
+            onClick={savePeaceTime}
+            className="text-sm  bg-buttonBase-500 hover:bg-indigo-700 text-white font-bold py-1 px-8 rounded"
+          >
+            Submit
+          </button>
+        )}
+
+        {selectedTimes.length > 1 && (
+          <button
+            onClick={savePeaceTimeMultiple}
+            className="text-sm  bg-buttonBase-500 hover:bg-indigo-700 text-white font-bold py-1 px-8 rounded"
+          >
+            Submit Multiple
+          </button>
+        )}
       </div>
 
       <p className=" justify-top flex items-center justify-center">
@@ -300,64 +355,42 @@ const MarkMinutes = () => {
 
       <div className="m-4 justify-top flex items-center justify-center">
         <div className="bg1-gray-800 border-2 border1-gray-900 shadow-2xl rounded-lg">
-          <div className="p-6 text-gray-800 grid grid-cols-3 gap-3 text-sm">
-            <button
-              className="hover:animate-pulse hover:text-white font-medium bg-gray-200 hover:bg-buttonBase-500 rounded-full p-5"
-              onClick={handlePredefined}
-            >
-              04:00 AM
-            </button>
-            <button
-              className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-buttonBase-500 rounded-full p-5"
-              onClick={handlePredefined}
-            >
-              05:45 AM
-            </button>
-            <button
-              className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-buttonBase-500 rounded-full p-5"
-              onClick={handlePredefined}
-            >
-              07:00 AM
-            </button>
+          <ul className="p-6 text-gray-800 grid grid-cols-3 gap-3 text-sm">
+            {preDefinedTimeList.map((item) => {
+              return (
+                <li className="hover:animate-pulse" key={item}>
+                  <input
+                    type="checkbox"
+                    id={item}
+                    value={item}
+                    className="hidden peer"
+                    required=""
+                    onChange={(e) => handleMultiTimePredefined(e)}
+                  />
+                  <label
+                    htmlFor={item}
+                    className="inline-flex items-center text-justify px-2 py-2 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  >
+                    ✓ {item}
+                  </label>
+                </li>
+              );
+            })}
+          </ul>
 
-            <button
-              className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-buttonBase-500 rounded-full p-5"
-              onClick={handlePredefined}
-            >
-              10:30 AM
-            </button>
-            <button
-              className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-buttonBase-500 rounded-full p-5"
-              onClick={handlePredefined}
-            >
-              12:00 PM
-            </button>
-            <button
-              className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-buttonBase-500 rounded-full p-5"
-              onClick={handlePredefined}
-            >
-              05:30 PM
-            </button>
-
-            <button
-              className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-buttonBase-500 rounded-full p-5"
-              onClick={handlePredefined}
-            >
-              07:30 PM
-            </button>
-            <button
-              className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-buttonBase-500 rounded-full p-5"
-              onClick={handlePredefined}
-            >
-              09:30 PM
-            </button>
-            <button
-              className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-buttonBase-500 rounded-full p-5"
-              onClick={handlePredefined}
-            >
-              10:00 PM
-            </button>
-          </div>
+          {/* <div className="p-6 text-gray-800 grid grid-cols-3 gap-3 text-sm">
+            {preDefinedTimeList.map((item) => {
+              return (
+                <button
+                  key={item}
+                  className="hover:animate-pulse  hover:text-white font-medium bg-gray-200 hover:bg-buttonBase-500 rounded-full p-5"
+                  onClick={handlePredefined}
+                >
+                  {item}
+                </button>
+              );
+            })}
+          </div> */}
         </div>
       </div>
       <ul className="flex items-center justify-center items-center justify-center flex-1 pt-6 list-none lg:pt-0 lg:flex">
