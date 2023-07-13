@@ -15,17 +15,20 @@ export default async (req, res) => {
     } else if (include == "all") {
       const _userMinutes = await getUserPeaceMinutes(userId);
       userMinutes = _userMinutes.records;
-      res.status(200).json({ status: "ok", userMinutes });
     } else {
       const _userMinutes = await getUserPeaceMinutes(userId);
       userMinutes = _userMinutes.records;
     }
 
-    totalMinutes = userMinutes.reduce(function (sum, mins) {
-      return sum + mins.event_minutes;
-    }, 0);
+    if (include == "all") {
+      res.status(200).json({ status: "ok", userMinutes });
+    } else {
+      totalMinutes = userMinutes.reduce(function (sum, mins) {
+        return sum + mins.event_minutes;
+      }, 0);
 
-    res.status(200).json({ status: "ok", totalMinutes });
+      res.status(200).json({ status: "ok", totalMinutes });
+    }
   } catch (error) {
     res
       .status(500)
