@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sivanum - Naanum - Drawing Contest 2024</title>
+    <!-- Include Tailwind CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-blue-200 p-4">
+    <div class="max-w-md mx-auto bg-white rounded-md shadow-md">
+      <header class="mb-6 flex items-center justify-between">
+        <!-- <div class="logo">
+                <img src="path/to/your/logo.png" alt="Brand Logo" class="h-10"> 
+            </div> -->
+        <div class="banner">
+          <img
+            src="./contest-banner.png"
+            alt="Banner Image"
+            class="w-full rounded-t-md"
+          />
+        </div>
+      </header>
+      <h3 class="text-2xl font-bold text-blue-600 mt-1 pl-4">
+        Registration Form
+      </h3>
+      <h4 class="text-sm text-slate-600 mb-6 pl-4">
+        Drawing Contest for Kids<span class="text-xs text-gray-500">
+          (Age 5 - 9 or 10 - 14). | more details...</span
+        >
+      </h4>
+      <form class="pl-4 pr-4" id="frmRegister">
+        <div id="errorSummary" class="mb-1 text-red-500 p-2 rounded-md"></div>
+
+        <!-- Name -->
+        <div class="mb-4">
+          <label for="cName" class="block text-blue-600  mb-2"
+            >Name :</label
+          >
+          <input
+            type="text"
+            placeholder="Participant Name"
+            id="cName"
+            name="cName"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          />
+        </div>
+
+        <!-- Gender -->
+        <div class="mb-8">
+          <label class="block text-blue-600 font-bold mb-2">Gender :</label>
+          <label class="inline-flex items-center">
+            <input
+              type="radio"
+              id="cGender_m"
+              name="cGender"
+              class="form-radio text-blue-500"
+              value="male"
+            />
+            <span class="ml-2">Male</span>
+          </label>
+          <label class="inline-flex items-center ml-6">
+            <input
+              type="radio"
+              id="cGender_f"
+              name="cGender"
+              class="form-radio text-blue-500"
+              value="female"
+            />
+            <span class="ml-2">Female</span>
+          </label>
+        </div>
+
+        <!-- DOB -->
+        <div class="mb-4">
+          <label for="cDob" class="block text-blue-600 font-bold mb-2"
+            >Date of Birth:
+            <span class="text-xs text-gray-500">
+              (Participant age shoud be less than 15)</span
+            ></label
+          >
+          <input
+            type="date"
+            onchange="updateLabels(this)"
+            id="cDob"
+            min="2009-01-01" max="2019-03-31"
+            name="cDob"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="cGuardianName" class="block text-blue-600 font-bold mb-2"
+            >Father / Guardian Name:</label
+          >
+          <input
+            type="text"
+            id="cGuardianName"
+            placeholder="Parent/Guardian Name"
+            name="cGuardianName"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label
+            for="cGuardianMobile"
+            class="block text-blue-600 font-bold mb-2"
+            >Father / Guardian Mobile:</label
+          >
+          <input
+            type="text"
+            id="cGuardianMobile"
+            placeholder="Parent/Guardian Mobile"
+            name="cGuardianMobile"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="cSchoolName" class="block text-blue-600 font-bold mb-2"
+            >School Name:</label
+          >
+          <input
+            type="text"
+            id="cSchoolName"
+            name="cSchoolName"
+            placeholder="School Name and Location"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label for="cClass" class="block text-blue-600 font-bold mb-2"
+            >Class/Standard:</label
+          >
+          <input
+            type="text"
+            id="cClass"
+            name="cClass"
+            placeholder="Class studying"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          />
+        </div>
+
+        <!-- School, Class, State, District, Address -->
+        <!-- ... (similar structure for other input fields) -->
+
+        <!-- DrawingImage and DrawingSelfie -->
+
+        <!-- Terms -->
+        <div class="mb-4">
+          <label for="cState" class="block text-blue-600 font-bold mb-2"
+            >State:
+            <span class="text-xs text-gray-500">
+              (only for tamilnadu residents)</span
+            ></label
+          >
+          <select
+            id="cState"
+            name="cState"
+            disabled
+            name="district"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          >
+            <option value="district1">Tamilnadu</option>
+
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+        <div class="mb-4">
+          <label for="cAddress" class="block text-blue-600 font-bold mb-2"
+            >Address:</label
+          >
+          <textarea
+            type="text"
+            id="cAddress"
+            name="cAddress"
+            placeholder="Address for communication"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          ></textarea>
+        </div>
+
+        <div class="mb-4">
+          <label for="cDistrict" class="block text-blue-600 font-bold mb-2"
+            >District:</label
+          >
+          <select
+            id="cDistrict"
+            name="cDistrict"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          >
+            <option value="-1">---Select---</option>
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+
+        <!-- ConnectedCentre Dropdown -->
+        <div class="mb-4">
+          <label for="cNearBy" class="block text-blue-600 font-bold mb-2"
+            >Nearby Centre:<span class="text-xs text-gray-500">
+                (for receiving certificate and prizes)</span
+              ></label
+          >
+          <select
+            id="cNearBy"
+            name="cNearBy"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          >
+            <option value="-1">---Select---</option>
+
+            <!-- Add more options as needed -->
+          </select>
+        </div>
+
+        <!-- AgeGroup Dropdown -->
+        <!-- <div class="mb-4">
+                <label class="block text-blue-600 font-bold mb-2">Age Group <span class="text-red-600">*</span>  <span class="text-red-600">*</span> :</label>
+                <label class="inline-flex items-center">
+                    <input type="radio" disabled name="gender" class="form-radio text-blue-500" value="male">
+                    <span class="ml-2">5-9</span>
+                </label>
+                <label class="inline-flex items-center ml-6">
+                    <input type="radio" disabled name="gender" class="form-radio text-blue-500" value="female">
+                    <span class="ml-2">10-14</span>
+                </label>
+            </div> -->
+        <!-- Topic Dropdown -->
+        <div class="mb-4">
+          <label for="cTopics" class="block text-blue-600 font-bold mb-2"
+            >Topic Chosen | Age Group : <span class="text-xs text-gray-500" id="lblAge"></span>
+          </label>
+          <select
+            id="cTopics"
+            name="cTopics"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          ></select>
+        </div>
+
+        <div class="mb-4">
+          <label  class="block text-blue-600 font-bold mb-2"
+            >Drawing Image:</label
+          >
+          <div
+            class="relative rounded-md border-dashed border-2 border-blue-500 p-4"
+          >
+            <input
+              type="file"
+              id="cDrawingImage"
+              name="cDrawingImage"
+              accept="image/jpeg, image/png"
+              class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
+            />
+            <div class="text-center">
+              <p class="text-gray-600">Click to select a file (10MB max png or jpg allowed).</p>
+            </div>
+            
+
+          </div>
+          <div id="thumbnailContainer" class="mt-2 "></div>
+        </div>
+        <div class="mb-4">
+          <label for="cDrawingTitle" class="block text-blue-600 font-bold mb-2"
+            >Drawing Title:<title></title
+          ></label>
+          <input
+            type="text"
+            id="cDrawingTitle"
+            placeholder="What title you want to give for this drawing"
+            name="cDrawingTitle"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          />
+        </div>
+
+        <!-- DrawingSelfie File Input -->
+        <!-- <div class="mb-4">
+                <label for="drawingSelfie" class="block text-blue-600 font-bold mb-2">Drawing Selfie <span class="text-red-600">*</span>  <span class="text-red-600">*</span> :</label>
+                <div class="relative rounded-md border-dashed border-2 border-blue-500 p-4">
+                    <input type="file" id="drawingSelfie" name="drawingSelfie" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
+                    <div class="text-center">
+                        <p class="text-gray-600">Click to upload file (10MB max)</p>
+                    </div>
+                </div>
+            </div> -->
+
+        <div class="mb-4">
+                <label class="inline-flex items-center" for="cTerms">
+                    <input type="checkbox" id="cTerms" name="cTerms" class="form-checkbox text-blue-500">
+                    <span class="ml-2">I agree to the terms and conditions</span>
+                </label>
+            </div>
+        <div class="flex items-center pb-4">
+          <label class="inline-flex items-center">
+            Submission can be done only after Feb 29 2024
+          </label>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex items-center justify-end pb-4">
+          <button
+            type="submit"
+            id="btnSubmit"
+            class="bg-blue-500 pl-8 pr-8 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+      <footer
+        class="bg-blue-800 text-white text-center p-1 md:p-1 lg:p-21 mt-20"
+      >
+        <div class="container mx-auto">
+          <div class="mt-2 mb-2">
+            <p class="text-xs">
+              &copy; 2024 Brahma Kumaris - Chennai |
+              <a href="https://tamil.brahmakumaris.com">brahmakumaris.com</a>
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      let districts = {};
+      const populateDropdown = async (dropdownId, data) => {
+
+        const dropdown = document.getElementById(dropdownId);
+        if (data) {
+          data.forEach((option) => {
+            const optionElement = document.createElement("option");
+            optionElement.value = option.value;
+            optionElement.textContent = option.label;
+            dropdown.appendChild(optionElement);
+          });
+        }
+      };
+
+      function isValidImageType(fileType) {
+      return /^image\/(jpeg|png)$/.test(fileType);
+    }
+
+    function handleFileInputChange() {
+      var fileInput = document.getElementById('cDrawingImage');
+      var thumbnailContainer = document.getElementById('thumbnailContainer');
+
+      // Clear previous thumbnail
+      thumbnailContainer.innerHTML = '';
+
+      // Check if a file is selected
+      if (fileInput.files.length > 0) {
+        var selectedFile = fileInput.files[0];
+
+        // Validate file type (optional)
+        if (isValidImageType(selectedFile.type)) {
+          // Create thumbnail
+          var thumbnail = document.createElement('img');
+          thumbnail.src = URL.createObjectURL(selectedFile);
+          thumbnail.alt = 'Selected Image Thumbnail';
+          thumbnail.classList.add('max-w-full', 'max-h-32', 'mt-2');
+
+          // Create remove button
+          var removeButton = document.createElement('button');
+          removeButton.type = 'button';
+          removeButton.textContent = 'Remove Selection';
+          removeButton.classList.add('text-xs','bg-red-500', 'text-white', 'font-bold', 'py-2', 'px-4', 'rounded', 'mt-2', 'hover:bg-red-700', 'cursor-pointer', 'transition', 'duration-300', 'ease-in-out');
+          removeButton.addEventListener('click', function() {
+            // Clear the file input and thumbnail
+            fileInput.value = '';
+            thumbnailContainer.innerHTML = '';
+          });
+
+          // Append thumbnail and remove button to the container
+          thumbnailContainer.appendChild(thumbnail);
+          thumbnailContainer.appendChild(removeButton);
+        } else {
+          alert('Invalid file type. Please select a JPEG or PNG file.');
+          fileInput.value = ''; // Clear the file input
+        }
+      }
+    }
+
+      const url =
+        "https://script.google.com/macros/s/AKfycbwnDx5nQDNM9bDrhTNrl_joeMtMyDtgCYj8xBojrF5MRdrVzhCL9gzltprc4iUALhR7/exec"; // <--- Please set the URL of Web Apps.
+
+      (async () => {
+        document.getElementById('cDrawingImage').addEventListener('change', handleFileInputChange);
+
+        fetch(`${url}`, { method: "POST" })
+          .then((res) => res.json())
+          .then((data) => {
+            districts = data;
+            const formatted = Object.keys(districts).map((p) => ({
+              label: p,
+              value: p,
+            }));
+            console.log(formatted);
+            populateDropdown("cDistrict", formatted);
+            
+          }) // <--- You can retrieve the returned value here.
+          .catch((err) => console.log(err));
+      })();
+      const form = document.getElementById("frmRegister");
+
+      const populateTopics = (grpLevel) => {
+        const _topics = [
+          "விநாயகருடன் லிங்கம்",
+          "முருகனுடன் லிங்கம்",
+          "நந்தியுடன் லிங்கம்",
+          "பார்வதியுடன் லிங்கம்",
+          "சிவன் எந்நாட்டவர்க்கும் இறைவன்",
+          "மார்க்கண்டேயன்",
+          "சிவன் அன்புக்கடல்",
+          "கண்ணப்ப நாயனார்",
+        ];
+
+        const actualTopics=grpLevel==1?_topics.slice(0,4):_topics.slice(4,8)
+        console.log(actualTopics.map((p) => ({ label: p, value: p })))
+
+        const ddTopics=document.getElementById('cTopics');
+        while (ddTopics.options.length > 0) {
+            ddTopics.remove(0);
+        }
+
+        populateDropdown(
+          "cTopics",
+          actualTopics.map((p) => ({ label: p, value: p }))
+        );
+      };
+
+
+      const updateLabels=(elemDob)=>{
+
+        const monthDiff=calculateMonth(new Date(elemDob.value),new Date())
+        const years=Math.round(monthDiff/12 * 100) / 100;
+        
+        if(years>4 && years<10){
+                document.getElementById('lblAge').innerHTML=`${years} years old - Group 1`
+                populateTopics(1)
+        }
+        if(years>10 && years<15){
+            document.getElementById('lblAge').innerHTML=`${years} years old - Group 2`
+            populateTopics(2)
+        }
+      }
+
+        const calculateMonth=(startDate,endDate)=>{
+            const months = (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+                    endDate.getMonth() - startDate.getMonth();
+
+            // Adjust for any remaining days in the last month
+            if (endDate.getDate() < startDate.getDate()) {
+            months--;
+            }
+            return months;
+
+        }
+      const districtDropdown = document.getElementById("cDistrict");
+      districtDropdown.addEventListener("change", (e) => {
+        const formatted = districts[e.target.value].map((p) => ({
+          label: p.location,
+          value: p.rowId + "-" + p.location,
+        }));
+        console.log(formatted);
+        const dropdown = document.getElementById("cNearBy");
+        while (dropdown.options.length > 0) {
+          dropdown.remove(0);
+        }
+        populateDropdown("cNearBy", formatted);
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        document.getElementById("errorSummary").innerHTML = "";
+
+        // Perform basic form validation
+        const name = document.getElementById("cName").value.trim();
+        const gender = document.querySelector('input[name="cGender"]:checked');
+        const dob = document.getElementById("cDob").value.trim();
+        const guardName = document.getElementById("cGuardianName").value.trim();
+        const guardMobile = document.getElementById("cGuardianMobile").value.trim();
+        const schoolName = document.getElementById("cSchoolName").value.trim();
+        const classStd = document.getElementById("cClass").value.trim();
+        const address = document.getElementById("cAddress").value.trim();
+        const selDistrict = document.getElementById("cDistrict").value.trim();
+        const nearBy = document.getElementById("cNearBy").value.trim();
+        const drawingTopic = document.getElementById("cTopics").value.trim();
+        const drawingImage = document.getElementById("cDrawingImage").value.trim();
+        const drawingTitle = document.getElementById("cDrawingTitle").value.trim();
+        const terms = document.querySelector('input[name="cTerms"]:checked');
+        
+
+        // Create an array to store error messages
+        const errors = [];
+
+        if (!name) {
+          errors.push("Name is required.");
+        }
+
+        if (!gender) {
+          errors.push("Please select a gender.");
+        }
+
+        if (!dob) {
+          errors.push("Date of Birth is required.");
+        }
+
+        if (!guardName) {
+          errors.push("Guardian Name is required.");
+        }
+        if (!guardMobile) {
+          errors.push("Guardian Mobile is required.");
+        }
+        if (!schoolName) {
+          errors.push("School Name is required.");
+        }
+
+        if (!classStd) {
+          errors.push("Class or Standard cannot be empty");
+        }
+        if (!address) {
+          errors.push("Address cannot be empty");
+        }
+        if (!selDistrict) {
+          errors.push("District cannot be empty");
+        }
+        if (!nearBy) {
+          errors.push("Nearby Centre cannot be empty");
+        }
+        if (!drawingTopic) {
+          errors.push("Contest Topic cannot be empty");
+        }
+        if (!drawingTitle) {
+          errors.push("Please provide a title for your drawning");
+        }
+        if (!drawingImage) {
+          errors.push("Please upload drawn image - 10 MB Max allowed");
+        }
+        if (!terms) {
+          errors.push("Please agree to terms before submitting");
+        }
+        // alert(errors)
+
+        // Display error messages in the summary container
+        if (errors.length > 0) {
+          const errorSummary = document.getElementById("errorSummary");
+          errors.forEach(function (error) {
+            errorSummary.innerHTML += "<p>" + error + "</p>";
+          });
+          errorSummary.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+
+        //const file = form.file.files[0];
+        //const fr = new FileReader();
+        // fr.readAsArrayBuffer(file);
+        //fr.onload = f => {
+        return;
+        const url =
+          "https://script.google.com/macros/s/AKfycbwnDx5nQDNM9bDrhTNrl_joeMtMyDtgCYj8xBojrF5MRdrVzhCL9gzltprc4iUALhR7/exec"; // <--- Please set the URL of Web Apps.
+
+        //const qs = new URLSearchParams({filename: form.filename.value || file.name, mimeType: file.type});
+        //fetch(`${url}?${qs}`, {method: "POST", body: JSON.stringify([...new Int8Array(f.target.result)])})
+        fetch(`${url}`, { method: "POST" })
+          .then((res) => res.json())
+          .then((e) => console.log(e)) // <--- You can retrieve the returned value here.
+          .catch((err) => console.log(err));
+        //}
+      });
+    </script>
+  </body>
+</html>
