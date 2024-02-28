@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sivanum - Naanum - Drawing Contest 2024</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-blue-200 p-4">
+
+    <div class="max-w-md mx-auto bg-white  rounded-md shadow-md">
+        <header class="mb-6 flex items-center  justify-between"> 
+            <!-- <div class="logo">
+                <img src="path/to/your/logo.png" alt="Brand Logo" class="h-10"> 
+            </div> -->
+            <div class="banner ">
+                <img src="./contest-banner.png" alt="Banner Image" class="w-full rounded-t-md">
+            </div>
+        </header>
+        <h3 class="text-2xl font-bold text-blue-600 mt-1 pl-4">Terms and Conditions </h3>
+        <h4 class="text-sm text-slate-600 mb-6 pl-4">Drawing Contest for Kids<span class="text-xs text-gray-500	"> (Age 5 - 9 or 10 - 14)</span></h4>
+        <div class="p-4">
+            <ol>
+                <li><strong>Copyright and Ownership:</strong></li>
+                
+                </ol>
+                <p>  - By submitting the artwork, participants grant Brahma Kumaris the right to use, reproduce, and display the artwork for promotional and marketing purposes, including but not limited to social media, websites, and print materials.</p>
+                <p>  - Participants retain ownership of their artwork and may use it for personal purposes or non-commercial use.</p>
+                <ol start='2' >
+                <li><strong>Judging Criteria:</strong></li>
+                
+                </ol>
+                <p>  - Artwork will be judged based on creativity, originality, interpretation of the theme, and artistic skill.</p>
+                <p>  - The decision of the judging panel is final and binding.</p>
+                <ol start='3' >
+                <li><strong>Prizes:</strong></li>
+                
+                </ol>
+                <p>  - Prizes will be awarded to winners in different age categories, as determined by the judging panel.</p>
+                <p>  - Prize details will be announced prior to the competition deadline.</p>
+                <ol start='4' >
+                <li><strong>Submission Deadline:</strong></li>
+                
+                </ol>
+                <p>  - All artwork must be submitted by [Specify Submission Deadline] via [Submission Method].</p>
+                <ol start='5' >
+                <li>- Winners will be notified via email or phone within [Specify Notification Timeline].</li>
+                
+                </ol>
+                <p>  - Winners must respond within [Specify Response Timeline] to claim their prize. Failure to do so may result in disqualification and selection of an alternate winner.</p>
+                <ol start='6' >
+                <li><strong>Publicity:</strong></li>
+                
+                </ol>
+                <p>  - By participating in the competition, participants consent to the use of their name, likeness, and artwork for promotional purposes without further compensation.</p>
+                <ol start='7' >
+                <li><strong>General Conditions:</strong></li>
+                
+                </ol>
+                <p>  - Brahma Kumaris reserves the right to modify, suspend, or terminate the competition at any time without prior notice.</p>
+                <p>  - Brahma Kumaris is not responsible for lost, late, incomplete, or misdirected entries, or for any technical or human error that may occur during the submission process.</p>
+                <p>  - Participation in the competition constitutes acceptance of these terms and conditions.</p>
+                <p>Participants should carefully read and agree to these terms and conditions before submitting their artwork.</p>
+                
+        </div>
+        <footer class="bg-blue-800 text-white text-center p-1 md:p-1 lg:p-21 mt-20">
+            <div class="container mx-auto">
+              <!-- Your other footer content goes here -->
+              
+              <div class="mt-4">
+                <p class="text-xs ">&copy; 2024 Brahma Kumaris - Chennai | <a href='https://tamil.brahmakumaris.com'>brahmakumaris.com</a></p>
+              </div>
+            </div>
+          </footer>
+
+    </div>
+
+    <script>
+            let districts={};
+            const populateDropdown = async (dropdownId, data) => {
+                const dropdown = document.getElementById(dropdownId);
+                if (data) {
+                    data.forEach(option => {
+                        const optionElement = document.createElement('option');
+                        optionElement.value = option.value;
+                        optionElement.textContent = option.label;
+                        dropdown.appendChild(optionElement);
+                    });
+                }
+            };
+            
+         const url = "https://script.google.com/macros/s/AKfycbwnDx5nQDNM9bDrhTNrl_joeMtMyDtgCYj8xBojrF5MRdrVzhCL9gzltprc4iUALhR7/exec";  // <--- Please set the URL of Web Apps.
+      
+        (async ()=>{
+
+            fetch(`${url}`, {method: "POST"})
+            .then(res => res.json())
+            .then(data => {
+                districts=data;
+                const formatted=Object.keys(districts).map(p=>({label:p,value:p}));
+                console.log(formatted)
+                populateDropdown('district',formatted)
+
+            })  // <--- You can retrieve the returned value here.
+            .catch(err => console.log(err));
+            
+
+
+        })();
+        const form = document.getElementById('frmRegister');
+
+        const populateTopics=()=>{
+            const topics=
+            ['விநாயகருடன் லிங்கம்',
+            'முருகனுடன் லிங்கம்',
+            'நந்தியுடன் லிங்கம்',
+            'பார்வதியுடன் லிங்கம்',
+            'சிவன் எந்நாட்டவர்க்கும் இறைவன்',
+            'மார்க்கண்டேயன்',
+            'சிவன் அன்புக்கடல்',
+            'கண்ணப்ப நாயனார்']
+
+            populateDropdown('topic_kids',topics.map(p=>({label:p,value:p})));
+
+        }
+
+        const districtDropdown=document.getElementById('district');
+        districtDropdown.addEventListener('change', e => {
+                
+                const formatted=districts[e.target.value].map(p=>({label:p.location,value:p.rowId+'-'+p.location}));
+                console.log(formatted)
+                const dropdown=document.getElementById('connectedCentre')
+                while (dropdown.options.length > 0) {
+                    dropdown.remove(0);
+                }
+                populateDropdown('connectedCentre',formatted)
+
+        });
+
+        form.addEventListener('submit', e => {
+            
+          e.preventDefault();
+          alert(4);
+          //const file = form.file.files[0];
+          //const fr = new FileReader();
+         // fr.readAsArrayBuffer(file);
+          //fr.onload = f => {
+            
+            const url = "https://script.google.com/macros/s/AKfycbwnDx5nQDNM9bDrhTNrl_joeMtMyDtgCYj8xBojrF5MRdrVzhCL9gzltprc4iUALhR7/exec";  // <--- Please set the URL of Web Apps.
+            
+            //const qs = new URLSearchParams({filename: form.filename.value || file.name, mimeType: file.type});
+            //fetch(`${url}?${qs}`, {method: "POST", body: JSON.stringify([...new Int8Array(f.target.result)])})
+            fetch(`${url}`, {method: "POST"})
+            .then(res => res.json())
+            .then(e => console.log(e))  // <--- You can retrieve the returned value here.
+            .catch(err => console.log(err));
+          //}
+        });
+        </script>
+
+
+
+</body>
+
+</html>

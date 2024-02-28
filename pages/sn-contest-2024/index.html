@@ -25,6 +25,7 @@
           />
         </div>
       </header>
+      
       <h3 class="text-2xl font-bold text-blue-600 mt-1 pl-4">
         Registration Form
       </h3>
@@ -33,6 +34,15 @@
           (Age 5 - 9 or 10 - 14). | more details...</span
         >
       </h4>
+
+      <div class="max-w-md mx-auto p-6 bg-white rounded-md shadow-md text-center" style="display:none" id="dvThanks">
+        Registration Code : <h2 class="text-2xl font-bold text-red-600 mb-4" id="regCode"></h2>
+        <h2 class="text-2xl font-bold text-blue-600 mb-4">Thank You for Registering!</h2>
+       
+        <p class="text-gray-600" id="regText"> </p>
+        <a href="/" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Submit another one</a>
+      </div>
+    
       <form class="pl-4 pr-4" id="frmRegister">
         <div id="errorSummary" class="mb-1 text-red-500 p-2 rounded-md"></div>
 
@@ -194,8 +204,8 @@
             name="cDistrict"
             class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
           >
-            <option value="-1">---Select---</option>
-            <!-- Add more options as needed -->
+
+
           </select>
         </div>
 
@@ -234,6 +244,8 @@
           <label for="cTopics" class="block text-blue-600 font-bold mb-2"
             >Topic Chosen | Age Group : <span class="text-xs text-gray-500" id="lblAge"></span>
           </label>
+          <input type="hidden" name="cGroup" id="cGroup"/>
+          <input type="hidden" name="cAge" id="cAge"/>
           <select
             id="cTopics"
             name="cTopics"
@@ -290,7 +302,7 @@
         <div class="mb-4">
                 <label class="inline-flex items-center" for="cTerms">
                     <input type="checkbox" id="cTerms" name="cTerms" class="form-checkbox text-blue-500">
-                    <span class="ml-2">I agree to the terms and conditions</span>
+                    <span class="ml-2 text-sm">I agree to the terms and conditions. <a class="text-sm text-blue-500" target="_blank" href='/terms.html'>Terms</a></span>
                 </label>
             </div>
         <div class="flex items-center pb-4">
@@ -308,6 +320,15 @@
           >
             Submit
           </button>
+          <button
+          type="button"
+          disabled
+          id="btnProgress"
+          style="display:none"
+          class="bg-blue-300 pl-8 pr-8  text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+        >
+          Submitting...
+        </button>
         </div>
       </form>
       <footer
@@ -317,7 +338,7 @@
           <div class="mt-2 mb-2">
             <p class="text-xs">
               &copy; 2024 Brahma Kumaris - Chennai |
-              <a href="https://tamil.brahmakumaris.com">brahmakumaris.com</a>
+              <a href="https://tamil.brahmakumaris.com" target="_blank">brahmakumaris.com</a>
             </p>
           </div>
         </div>
@@ -326,9 +347,10 @@
 
     <script>
       let districts = {};
-      const populateDropdown = async (dropdownId, data) => {
+      const populateDropdown = async (dropdownId, _data) => {
 
         const dropdown = document.getElementById(dropdownId);
+        const data=[{label:'---Select---',value:''},..._data]
         if (data) {
           data.forEach((option) => {
             const optionElement = document.createElement("option");
@@ -383,13 +405,13 @@
       }
     }
 
-      const url =
+      const APP_SCRIPT_URL =
         "https://script.google.com/macros/s/AKfycbwnDx5nQDNM9bDrhTNrl_joeMtMyDtgCYj8xBojrF5MRdrVzhCL9gzltprc4iUALhR7/exec"; // <--- Please set the URL of Web Apps.
 
       (async () => {
         document.getElementById('cDrawingImage').addEventListener('change', handleFileInputChange);
 
-        fetch(`${url}`, { method: "POST" })
+        fetch(`${APP_SCRIPT_URL}?action=districts`, { method: "POST" })
           .then((res) => res.json())
           .then((data) => {
             districts = data;
@@ -406,6 +428,7 @@
       const form = document.getElementById("frmRegister");
 
       const populateTopics = (grpLevel) => {
+        document.getElementById("cGroup").value=grpLevel
         const _topics = [
           "விநாயகருடன் லிங்கம்",
           "முருகனுடன் லிங்கம்",
@@ -442,9 +465,11 @@
                 populateTopics(1)
         }
         if(years>10 && years<15){
+            
             document.getElementById('lblAge').innerHTML=`${years} years old - Group 2`
             populateTopics(2)
         }
+        document.getElementById("cAge").value=years
       }
 
         const calculateMonth=(startDate,endDate)=>{
@@ -472,9 +497,13 @@
         populateDropdown("cNearBy", formatted);
       });
 
-      form.addEventListener("submit", (e) => {
+      form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
+
+       
+        
+ 
         document.getElementById("errorSummary").innerHTML = "";
 
         // Perform basic form validation
@@ -555,21 +584,44 @@
           return;
         }
 
-        //const file = form.file.files[0];
-        //const fr = new FileReader();
-        // fr.readAsArrayBuffer(file);
-        //fr.onload = f => {
-        return;
-        const url =
-          "https://script.google.com/macros/s/AKfycbwnDx5nQDNM9bDrhTNrl_joeMtMyDtgCYj8xBojrF5MRdrVzhCL9gzltprc4iUALhR7/exec"; // <--- Please set the URL of Web Apps.
+        const frmReg=document.getElementById('frmRegister');
+            const file = frmReg.cDrawingImage.files[0];
+            const formData = new FormData(frmReg);
+           const formValues = Object.fromEntries(formData.entries());
+             const { cDrawingImage,...formActualValues}=formValues
+            console.log(formActualValues)
+            let actualfileName=form.cDrawingImage.value || file.name;
+            if(actualfileName.indexOf('\\')>=0){
+                const parts=form.cDrawingImage.value.split('\\');
+                if(parts.length>2) 
+                    actualfileName=parts[2]
+                else
+                actualfileName= file.name;
+            }
+          
+         
+            const fr = new FileReader();    
+            fr.readAsArrayBuffer(file);
+            fr.onload = f => {
+            const qs = new URLSearchParams({filename: actualfileName, mimeType: file.type});
+            fetch(`${APP_SCRIPT_URL}?${qs}`, {method: "POST", body: JSON.stringify({formData:formActualValues,files:[...new Int8Array(f.target.result)]})})
+            .then(res => res.json())
+            .then(data => {
+                    document.getElementById("dvThanks").style.display=''
+                    document.getElementById("frmRegister").style.display='none'
+                    document.getElementById("regCode").innerHTML=data.regNo
+                    document.getElementById("msgText").innerHTML=data.regText
+            })  
+            .catch(err => console.log(err));
+            }
 
-        //const qs = new URLSearchParams({filename: form.filename.value || file.name, mimeType: file.type});
-        //fetch(`${url}?${qs}`, {method: "POST", body: JSON.stringify([...new Int8Array(f.target.result)])})
-        fetch(`${url}`, { method: "POST" })
-          .then((res) => res.json())
-          .then((e) => console.log(e)) // <--- You can retrieve the returned value here.
-          .catch((err) => console.log(err));
-        //}
+            
+        const btnProgress=document.getElementById('btnProgress');
+        const btnSubmit=document.getElementById('btnSubmit');
+        btnProgress.style.display='';
+        btnSubmit.style.display='none';
+
+      
       });
     </script>
   </body>
