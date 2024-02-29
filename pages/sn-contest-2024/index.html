@@ -4,11 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sivanum - Naanum - Drawing Contest 2024</title>
-    <!-- Include Tailwind CSS -->
+
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
+    <meta property="og:title" content="Sivanum - Naanum - Drawing Contest 2024 for Kids" />
+    <meta property="og:description" content="88வது மகா சிவராத்திரியை முன்னிட்டு
+    சிறுவர்களுக்கான இணைய வழி ஓவியப் போட்டி. | Join the drawing contest and showcase your artistic talent. அமைப்பாளர்கள் - பிரம்மா குமாரிகள் | சென்னை " />
+    <meta property="og:image" content="https://sn-contest.appdews.com/contest-banner.png" />
+    <meta property="og:url" content="https://sn-contest.appdews.com/" />
+    <meta property="og:type" content="website" />
+
   </head>
 
   <body class="bg-blue-200 p-4">
@@ -26,18 +33,18 @@
         </div>
       </header>
       
-      <h3 class="text-2xl font-bold text-blue-600 mt-1 pl-4">
+      <h3 class="text-2xl font-semibold text-blue-600 mt-1 pl-4">
         Registration Form
       </h3>
       <h4 class="text-sm text-slate-600 mb-6 pl-4">
         Drawing Contest for Kids<span class="text-xs text-gray-500">
-          (Age 5 - 9 or 10 - 14). | more details...</span
+          (Age 5 - 9 or 10 - 14). </span
         >
       </h4>
 
       <div class="max-w-md mx-auto p-6 bg-white rounded-md shadow-md text-center" style="display:none" id="dvThanks">
-        Registration Code : <h2 class="text-2xl font-bold text-red-600 mb-4" id="regCode"></h2>
-        <h2 class="text-2xl font-bold text-blue-600 mb-4">Thank You for Registering!</h2>
+        Registration Code : <h2 class="text-2xl font-semibold text-red-600 mb-4" id="regCode"></h2>
+        <h2 class="text-2xl font-semibold text-blue-600 mb-4">Thank You for Registering!</h2>
        
         <p class="text-gray-600" id="regText"> </p>
         <a href="/" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Submit another one</a>
@@ -48,7 +55,7 @@
 
         <!-- Name -->
         <div class="mb-4">
-          <label for="cName" class="block text-blue-600  mb-2"
+          <label for="cName" class="block text-blue-600 font-semibold mb-1"
             >Name :</label
           >
           <input
@@ -60,52 +67,58 @@
           />
         </div>
 
-        <!-- Gender -->
-        <div class="mb-8">
-          <label class="block text-blue-600 font-bold mb-2">Gender :</label>
-          <label class="inline-flex items-center">
-            <input
-              type="radio"
-              id="cGender_m"
-              name="cGender"
-              class="form-radio text-blue-500"
-              value="male"
-            />
-            <span class="ml-2">Male</span>
-          </label>
-          <label class="inline-flex items-center ml-6">
-            <input
-              type="radio"
-              id="cGender_f"
-              name="cGender"
-              class="form-radio text-blue-500"
-              value="female"
-            />
-            <span class="ml-2">Female</span>
-          </label>
+        <div class="flex flex-wrap">
+          <div class="w-1/2">  
+            <div class="mb-8">
+              <label class="block text-blue-600 font-semibold mb-1">Gender :</label>
+              <label class="inline-flex items-center">
+                <input
+                  type="radio"
+                  id="cGender_m"
+                  name="cGender"
+                  class="form-radio text-blue-500"
+                  value="male"
+                />
+                <span class="ml-2">Male</span>
+              </label>
+              <label class="inline-flex items-center ml-6">
+                <input
+                  type="radio"
+                  id="cGender_f"
+                  name="cGender"
+                  class="form-radio text-blue-500"
+                  value="female"
+                />
+                <span class="ml-2">Female</span>
+              </label>
+            </div>
+            </div>
+            <div class="w-1/2">  
+              <div class="mb-4">
+                <label for="cDob" class="block text-blue-600 font-semibold mb-1"
+                  >Date of Birth:
+                  <span class="text-xs text-gray-500">
+                    (Participant age shoud be less than 15)</span
+                  ></label
+                >
+                <input
+                  type="date"
+                  onchange="updateLabels(this)"
+                  id="cDob"
+                  min="2009-01-01" max="2019-03-31"
+                  name="cDob"
+                  class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+                />
+              </div>
+            </div>
         </div>
 
-        <!-- DOB -->
-        <div class="mb-4">
-          <label for="cDob" class="block text-blue-600 font-bold mb-2"
-            >Date of Birth:
-            <span class="text-xs text-gray-500">
-              (Participant age shoud be less than 15)</span
-            ></label
-          >
-          <input
-            type="date"
-            onchange="updateLabels(this)"
-            id="cDob"
-            min="2009-01-01" max="2019-03-31"
-            name="cDob"
-            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
-          />
-        </div>
-
-        <div class="mb-4">
-          <label for="cGuardianName" class="block text-blue-600 font-bold mb-2"
-            >Father / Guardian Name:</label
+    
+        <div class="flex flex-wrap">
+          <div class="w-1/2">  
+        <div class="mb-4 mr-2">
+          <label for="cGuardianName" class="block text-blue-600 font-semibold mb-1"
+            >Guardian Name:</label
           >
           <input
             type="text"
@@ -116,11 +129,13 @@
           />
         </div>
 
+</div>
+        <div class="w-1/2">  
         <div class="mb-4">
           <label
             for="cGuardianMobile"
-            class="block text-blue-600 font-bold mb-2"
-            >Father / Guardian Mobile:</label
+            class="block text-blue-600 font-semibold mb-1"
+            >  Mobile:</label
           >
           <input
             type="text"
@@ -130,32 +145,46 @@
             class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
           />
         </div>
+      </div>
 
-        <div class="mb-4">
-          <label for="cSchoolName" class="block text-blue-600 font-bold mb-2"
-            >School Name:</label
-          >
-          <input
-            type="text"
-            id="cSchoolName"
-            name="cSchoolName"
-            placeholder="School Name and Location"
-            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
-          />
         </div>
 
-        <div class="mb-4">
-          <label for="cClass" class="block text-blue-600 font-bold mb-2"
-            >Class/Standard:</label
-          >
-          <input
-            type="text"
-            id="cClass"
-            name="cClass"
-            placeholder="Class studying"
-            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
-          />
+
+        <div class="flex flex-wrap">
+          <div class="w-1/2">  
+            <div class="mb-4 mr-2">
+              <label for="cSchoolName" class="block text-blue-600 font-semibold mb-1"
+                >School Name:</label
+              >
+              <input
+                type="text"
+                id="cSchoolName"
+                name="cSchoolName"
+                placeholder="School Name and Location"
+                class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+              />
+            </div>
+            </div>
+
+            <div class="w-1/2">  
+
+              <div class="mb-4">
+                <label for="cClass" class="block text-blue-600 font-semibold mb-1"
+                  >Class/Standard:</label
+                >
+                <input
+                  type="text"
+                  id="cClass"
+                  name="cClass"
+                  placeholder="Class studying"
+                  class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+                />
+              </div>
+      
+            </div>
+
         </div>
+     
 
         <!-- School, Class, State, District, Address -->
         <!-- ... (similar structure for other input fields) -->
@@ -163,27 +192,10 @@
         <!-- DrawingImage and DrawingSelfie -->
 
         <!-- Terms -->
-        <div class="mb-4">
-          <label for="cState" class="block text-blue-600 font-bold mb-2"
-            >State:
-            <span class="text-xs text-gray-500">
-              (only for tamilnadu residents)</span
-            ></label
-          >
-          <select
-            id="cState"
-            name="cState"
-            disabled
-            name="district"
-            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
-          >
-            <option value="district1">Tamilnadu</option>
+      
 
-            <!-- Add more options as needed -->
-          </select>
-        </div>
         <div class="mb-4">
-          <label for="cAddress" class="block text-blue-600 font-bold mb-2"
+          <label for="cAddress" class="block text-blue-600 font-semibold mb-1"
             >Address:</label
           >
           <textarea
@@ -195,8 +207,36 @@
           ></textarea>
         </div>
 
+        <div class="flex flex-wrap">
+          <div class="w-1/2">  <div class="mb-4 mr-2">
+            <label for="cArea" class="block text-blue-600 font-semibold mb-1"
+              >Area</label
+            >
+            <input
+              type="text"
+              id="cArea"
+              name="cArea"
+              placeholder="Area | ex: adyar, annanagar etc"
+              class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+            />
+          </div> </div>
+          <div class="w-1/2">  <div class="mb-4">
+            <label for="cCity" class="block text-blue-600 font-semibold mb-1"
+              >City</label
+            >
+            <input
+              type="text"
+              id="cCity"
+              name="cCity"
+              placeholder="Enter City"
+              class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+            />
+          </div> </div>
+        </div>
+        
+    
         <div class="mb-4">
-          <label for="cDistrict" class="block text-blue-600 font-bold mb-2"
+          <label for="cDistrict" class="block text-blue-600 font-semibold mb-1"
             >District:</label
           >
           <select
@@ -211,8 +251,8 @@
 
         <!-- ConnectedCentre Dropdown -->
         <div class="mb-4">
-          <label for="cNearBy" class="block text-blue-600 font-bold mb-2"
-            >Nearby Centre:<span class="text-xs text-gray-500">
+          <label for="cNearBy" class="block text-blue-600 font-semibold mb-1"
+            >Choose Nearby Centre:<span class="text-xs text-gray-500">
                 (for receiving certificate and prizes)</span
               ></label
           >
@@ -226,10 +266,28 @@
             <!-- Add more options as needed -->
           </select>
         </div>
+        <div class="mb-4">
+          <label for="cState" class="block text-blue-600 font-semibold mb-1"
+            >State:
+            <span class="text-xs text-gray-500">
+              (only for tamilnadu & pondicherry residents)</span
+            ></label
+          >
+         <!-- <select
+            id="cState"
+            name="cState"
+            disabled
+            name="district"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          >
+            <option value="district1">Tamilnadu</option>
 
+         
+          </select>  -->
+        </div>
         <!-- AgeGroup Dropdown -->
         <!-- <div class="mb-4">
-                <label class="block text-blue-600 font-bold mb-2">Age Group <span class="text-red-600">*</span>  <span class="text-red-600">*</span> :</label>
+                <label class="block text-blue-600 font-semibold mb-1">Age Group <span class="text-red-600">*</span>  <span class="text-red-600">*</span> :</label>
                 <label class="inline-flex items-center">
                     <input type="radio" disabled name="gender" class="form-radio text-blue-500" value="male">
                     <span class="ml-2">5-9</span>
@@ -241,7 +299,7 @@
             </div> -->
         <!-- Topic Dropdown -->
         <div class="mb-4">
-          <label for="cTopics" class="block text-blue-600 font-bold mb-2"
+          <label for="cTopics" class="block text-blue-600 font-semibold mb-1"
             >Topic Chosen | Age Group : <span class="text-xs text-gray-500" id="lblAge"></span>
           </label>
           <input type="hidden" name="cGroup" id="cGroup"/>
@@ -254,7 +312,7 @@
         </div>
 
         <div class="mb-4">
-          <label  class="block text-blue-600 font-bold mb-2"
+          <label  class="block text-blue-600 font-semibold mb-1"
             >Drawing Image:</label
           >
           <div
@@ -276,7 +334,7 @@
           <div id="thumbnailContainer" class="mt-2 "></div>
         </div>
         <div class="mb-4">
-          <label for="cDrawingTitle" class="block text-blue-600 font-bold mb-2"
+          <label for="cDrawingTitle" class="block text-blue-600 font-semibold mb-1"
             >Drawing Title:<title></title
           ></label>
           <input
@@ -290,7 +348,7 @@
 
         <!-- DrawingSelfie File Input -->
         <!-- <div class="mb-4">
-                <label for="drawingSelfie" class="block text-blue-600 font-bold mb-2">Drawing Selfie <span class="text-red-600">*</span>  <span class="text-red-600">*</span> :</label>
+                <label for="drawingSelfie" class="block text-blue-600 font-semibold mb-1">Drawing Selfie <span class="text-red-600">*</span>  <span class="text-red-600">*</span> :</label>
                 <div class="relative rounded-md border-dashed border-2 border-blue-500 p-4">
                     <input type="file" id="drawingSelfie" name="drawingSelfie" class="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer">
                     <div class="text-center">
@@ -305,18 +363,14 @@
                     <span class="ml-2 text-sm">I agree to the terms and conditions. <a class="text-sm text-blue-500" target="_blank" href='/terms.html'>Terms</a></span>
                 </label>
             </div>
-        <div class="flex items-center pb-4">
-          <label class="inline-flex items-center">
-            Submission can be done only after Feb 29 2024
-          </label>
-        </div>
+       
 
         <!-- Submit Button -->
         <div class="flex items-center justify-end pb-4">
           <button
             type="submit"
             id="btnSubmit"
-            class="bg-blue-500 pl-8 pr-8 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+            class="bg-blue-500 pl-8 pr-8 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
           >
             Submit
           </button>
@@ -325,7 +379,7 @@
           disabled
           id="btnProgress"
           style="display:none"
-          class="bg-blue-300 pl-8 pr-8  text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+          class="bg-blue-300 pl-8 pr-8  text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
         >
           Submitting...
         </button>
@@ -515,6 +569,8 @@
         const schoolName = document.getElementById("cSchoolName").value.trim();
         const classStd = document.getElementById("cClass").value.trim();
         const address = document.getElementById("cAddress").value.trim();
+        const cCity = document.getElementById("cCity").value.trim();
+        const cArea = document.getElementById("cArea").value.trim();
         const selDistrict = document.getElementById("cDistrict").value.trim();
         const nearBy = document.getElementById("cNearBy").value.trim();
         const drawingTopic = document.getElementById("cTopics").value.trim();
@@ -572,6 +628,14 @@
         if (!terms) {
           errors.push("Please agree to terms before submitting");
         }
+        if (!cArea) {
+          errors.push("Area cannot be empty");
+        }
+
+        if (!cCity) {
+          errors.push("City cannot be empty");
+        }
+
         // alert(errors)
 
         // Display error messages in the summary container
