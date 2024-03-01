@@ -46,7 +46,7 @@
         Registration Code : <h2 class="text-2xl font-semibold text-red-600 mb-4" id="regCode"></h2>
         <h2 class="text-2xl font-semibold text-blue-600 mb-4">Thank You for Registering!</h2>
        
-        <p class="text-gray-600" id="regText"> </p>
+        <p class="text-gray-600" id="msgText"> </p>
         <a href="/" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out">Submit another one</a>
       </div>
     
@@ -473,7 +473,7 @@
               label: p,
               value: p,
             }));
-            console.log(formatted);
+            //console.log(formatted);
             populateDropdown("cDistrict", formatted);
             
           }) // <--- You can retrieve the returned value here.
@@ -495,7 +495,7 @@
         ];
 
         const actualTopics=grpLevel==1?_topics.slice(0,4):_topics.slice(4,8)
-        console.log(actualTopics.map((p) => ({ label: p, value: p })))
+        //console.log(actualTopics.map((p) => ({ label: p, value: p })))
 
         const ddTopics=document.getElementById('cTopics');
         while (ddTopics.options.length > 0) {
@@ -511,7 +511,7 @@
 
       const updateLabels=(elemDob)=>{
 
-        const monthDiff=calculateMonth(new Date(elemDob.value),new Date())
+        let monthDiff=calculateMonth(new Date(elemDob.value),new Date())
         const years=Math.round(monthDiff/12 * 100) / 100;
         
         if(years>4 && years<10){
@@ -527,7 +527,7 @@
       }
 
         const calculateMonth=(startDate,endDate)=>{
-            const months = (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+            let months = (endDate.getFullYear() - startDate.getFullYear()) * 12 +
                     endDate.getMonth() - startDate.getMonth();
 
             // Adjust for any remaining days in the last month
@@ -543,7 +543,7 @@
           label: p.location,
           value: p.rowId + "-" + p.location,
         }));
-        console.log(formatted);
+        //console.log(formatted);
         const dropdown = document.getElementById("cNearBy");
         while (dropdown.options.length > 0) {
           dropdown.remove(0);
@@ -653,7 +653,7 @@
             const formData = new FormData(frmReg);
            const formValues = Object.fromEntries(formData.entries());
              const { cDrawingImage,...formActualValues}=formValues
-            console.log(formActualValues)
+           // console.log(formActualValues)
             let actualfileName=form.cDrawingImage.value || file.name;
             if(actualfileName.indexOf('\\')>=0){
                 const parts=form.cDrawingImage.value.split('\\');

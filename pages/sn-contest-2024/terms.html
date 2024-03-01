@@ -101,7 +101,7 @@
             .then(data => {
                 districts=data;
                 const formatted=Object.keys(districts).map(p=>({label:p,value:p}));
-                console.log(formatted)
+                //console.log(formatted)
                 populateDropdown('district',formatted)
 
             })  // <--- You can retrieve the returned value here.
