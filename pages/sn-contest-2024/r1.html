@@ -1,0 +1,231 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drawing Contest Gallery</title>
+  <!-- Include Tailwind CSS from CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Add custom styles -->
+  <style>
+    .image-container {
+      cursor: pointer;
+    }
+    .image-details {
+      display: none;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 0 0 5px 5px;
+    }
+    .image-container:hover .image-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .comment-input {
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Image Gallery Container -->
+  <div class="container mx-auto my-10 flex flex-wrap justify-center" id="imageGallery">
+    <!-- Images will be dynamically added here -->
+  </div>
+
+  <!-- Modal for Image Details and Comments -->
+  <div id="imageModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center">
+    <div class="bg-white p-4 rounded-md max-w-md mx-auto">
+      <div class="flex justify-end">
+        <button id="closeModal" class="text-gray-600 hover:text-gray-800 focus:outline-none">
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+      <div id="modalContent" class="text-center">
+        <!-- Image and Comments will be displayed here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript to handle gallery and modal interactions -->
+  <script>
+
+
+const contestList=[ {
+    name: 'A.N.Arsha',
+    gender: 'female',
+    school: 'Govt. primary school Eraviputhoorkadai ',
+    topic: 'விநாயகருடன் லிங்கம்',
+    drawing_title: 'விநாயகருடன் லிங்கம்',
+    fileid: '1a75eY9mSvCXPtEi6HPyr7di8aRQSBpjN' },
+  { 
+    name: 'S. Sashith ',
+    gender: 'male',
+    school: 'Lakshmi matriculation school,cuddalore OT. ',
+    topic: 'விநாயகருடன் லிங்கம்',
+    drawing_title: 'வினாயகர் உடன் லிங்கம் ',
+    fileid: '15XTGTT1KOvXCi--Uc0QGhzQ6ckxRUpxQ' },
+  {
+    name: 'M.Advik sudhan ',
+    gender: 'male',
+    school: 'Sivakasi Nadars matric.Hr.secondary school',
+    topic: 'விநாயகருடன் லிங்கம்',
+    drawing_title: 'Dad love',
+    fileid: '17gNcDO13ge3lVWXJRpbiRuZARr396JW_' },
+  {
+    name: 'V. Naveens',
+    gender: 'female',
+    school: 'Nadar Saraswathi Primary School',
+    topic: 'நந்தியுடன் லிங்கம்',
+    drawing_title: 'அன்பே சிவம்',
+    fileid: '1_VObm0pNpwyJeeErkbagPW9u817-rfPY' },
+  { 
+    name: 'M.sridharshan',
+    gender: 'male',
+    school: 'Shivananda rajaram senior secondary school maraimalai nagar ',
+    topic: 'விநாயகருடன் லிங்கம்',
+    drawing_title: 'விநாயகருடன் லிங்கம் ',
+    fileid: '1KCPANhFHRTYjVu6bUQjXiWOxmJJSCD0P' },
+  {
+    name: 'Sk yuvaneshwaran ',
+    gender: 'male',
+    school: 'Kanakadasa Burger krishnagiri ',
+    topic: 'கண்ணப்ப நாயனார்',
+    drawing_title: 'கண்ணப்ப நாயனார்',
+    fileid: '1ZqO7kFXIub5LbqC5_vIu2xMYFK1CwQcZ' },
+  { 
+    name: 'Sk vinayak mahadev ',
+    gender: 'male',
+    school: 'Kanakadasa burgur',
+    topic: 'சிவன் அன்புக்கடல்',
+    drawing_title: 'சிவன் அன்புக்கடல்',
+    fileid: '1ioZEJt79UMdTe3UYbrbnfTSeb-YZI7JU' },
+  { 
+    name: 'M.YASHICA',
+    gender: 'female',
+    school: 'CHENNAI MIDDLE SCHOOL, CMDA MADURAVOYAL, CHENNAI-95. ',
+    topic: 'கண்ணப்ப நாயனார்',
+    drawing_title: ' கண்ணப்ப நாயனார் ',
+    fileid: '1oAAFQaUX-ufTTq4-9t_SNEkq3PXEWgWU' }];
+
+    const images1 = [
+      { 
+        src: 'https://lh3.google.com/u/0/d/1a75eY9mSvCXPtEi6HPyr7di8aRQSBpjN', 
+        author: 'John Doe', 
+        date: '2024-03-01',
+        title: 'Sunset Landscape',
+        comments: []
+      },
+      { 
+        src: 'https://picsum.photos/id/1020/800/600', 
+        author: 'Jane Smith', 
+        date: '2024-03-02',
+        title: 'Abstract Art',
+        comments: []
+      },
+      { 
+        src: 'https://picsum.photos/id/1022/800/600', 
+        author: 'Alex Johnson', 
+        date: '2024-03-03',
+        title: 'City Lights',
+        comments: []
+      },
+      // Add more images with comments as needed
+    ];
+
+    const images=contestList.map(
+        p=>{
+            const data1={
+            src: 'https://lh3.google.com/u/0/d/' + p.fileid, 
+        author: p.name, 
+        date: '2024-03-01',
+        title: p.drawing_title,
+        comments: [] 
+        }
+
+        return data1;
+    }
+    )
+    // Function to display the image and comments in the modal
+    function openModal(imageIndex) {
+      const modalContent = document.getElementById('modalContent');
+      modalContent.innerHTML = `
+        <img src="${images[imageIndex].src}" class="mx-auto max-h-96" alt="Contest Image">
+        <div class="image-details mt-4">
+          <p>Author: ${images[imageIndex].author}</p>
+          <p>Drawn Date: ${images[imageIndex].date}</p>
+          <p>Title: ${images[imageIndex].title}</p>
+        </div>
+        <textarea id="commentInput" class="comment-input mt-2" placeholder="Add your comment..."></textarea>
+        <button onclick="addComment(${imageIndex})" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Add Comment</button>
+        <div class="mt-4">
+          ${images[imageIndex].comments.map(comment => `<p>${comment}</p>`).join('')}
+        </div>
+      `;
+      document.getElementById('imageModal').classList.remove('hidden');
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      document.getElementById('imageModal').classList.add('hidden');
+    }
+
+    // Function to add a comment for an image
+    function addComment(imageIndex) {
+      const commentInput = document.getElementById('commentInput');
+      const comment = commentInput.value.trim();
+      if (comment !== '') {
+        images[imageIndex].comments.push(comment);
+        openModal(imageIndex); // Refresh the modal content
+        commentInput.value = ''; // Clear the comment input
+      }
+    }
+
+    // Function to dynamically create image elements and append them to the gallery
+    function createGallery() {
+      const galleryContainer = document.getElementById('imageGallery');
+      images.forEach((image, index) => {
+        const divElement = document.createElement('div');
+        divElement.classList.add('w-full', 'sm:w-1/2', 'md:w-1/3', 'lg:w-1/4', 'xl:w-1/4', 'mx-4', 'my-4', 'flex', 'flex-col', 'items-center', 'image-container');
+        divElement.innerHTML = `
+        <div class="container mx-auto p-6 mt-10 bg-white rounded-lg shadow-lg product-container">
+
+<!-- Product Image -->
+<img src="${image.src}" alt="Product Image" class="w-full h-64 object-cover mb-4 rounded-lg">
+
+
+<div class="mb-4">
+  <h2 class="text-3xl font-bold text-gray-800">${image.title}</h2>
+  <p class="text-gray-600">${image.author}</p>
+</div>
+
+<!-- Product Price -->
+<div class="flex items-center justify-between">
+  <p class="text-xl font-semibold text-gray-800">179 views</p>
+  <button class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600 focus:outline-none">View</button>
+</div>
+
+</div>
+       
+        `;
+        divElement.addEventListener('click', () => openModal(index));
+        galleryContainer.appendChild(divElement);
+      });
+    }
+
+    // Add event listener to close the modal
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+
+    // Create the image gallery
+    createGallery();
+  </script>
+
+</body>
+</html>
+
