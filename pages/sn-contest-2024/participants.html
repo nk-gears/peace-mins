@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Drawing Contest - Submissions</title>
+</head>
+<body class="bg-gray-100 p-8">
+
+    <div class="container mx-auto">
+        <h1 class="text-4xl font-bold mb-8">Sivanum - Nanum : Drawing Contest 2024 - Submissions <span id="grpName"></span></h1>
+        <div class="mt-8 flex justify-end items-end mb-2 " id="group-container">
+            <a id="btnGroup1" href="/participants.html?cgroup=1" class="active:bg-violet-700 mx-2 px-2 py-2  text-blue-400 rounded">Group 1</a> <span class="mx-2 px-2 py-2 ">|</span> <a id="btnGroup2" href="/participants.html?cgroup=2" class="mx-2 px-2 py-2  text-blue-500 rounded">Group 2</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="gallery-container">
+            <!-- Images will be dynamically added here -->
+        </div>
+
+        <div class="mt-8 flex justify-center items-center" id="pagination-container">
+            <!-- Pagination links will be dynamically added here -->
+            <button id="prev-btn" class="mx-2 px-4 py-2 bg-blue-500 text-white rounded" disabled>Prev</button>
+            <span id="pagination" class="flex items-center mx-4"></span>
+            <button id="next-btn" class="mx-2 px-4 py-2 bg-blue-500 text-white rounded">Next</button>
+        </div>
+    </div>
+
+    <div id="imageModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 hidden items-center justify-center">
+        <div class="bg-white p-4 rounded-md max-w-md mx-auto">
+          <div class="flex justify-end">
+            <button id="closeModal" class="text-gray-600 hover:text-gray-800 focus:outline-none">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          <div id="modalContent" class="text-center">
+            <!-- Image and Comments will be displayed here -->
+          </div>
+        </div>
+      </div>
+    
+    <script>
+        let imagesList=[];
+        const _apiUrl = 'https://script.google.com/macros/s/AKfycbwnDx5nQDNM9bDrhTNrl_joeMtMyDtgCYj8xBojrF5MRdrVzhCL9gzltprc4iUALhR7/exec?cgroup=';
+        const itemsPerPage = 10;
+        const apiUrl=location.href.indexOf('cgroup=2')>=0?_apiUrl+'2':_apiUrl+'1';
+        if(location.href.indexOf('cgroup=2')>=0){
+            //document.getElementById("btnGroup2").classList.add('text-blue-100');
+            document.getElementById("grpName").innerHTML="- Group 2"
+        }else{
+            document.getElementById("grpName").innerHTML="- Group 1"
+        }
+        
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                imagesList=data;
+                const galleryContainer = document.getElementById('gallery-container');
+                const paginationContainer = document.getElementById('pagination-container');
+                const prevButton = document.getElementById('prev-btn');
+                const nextButton = document.getElementById('next-btn');
+                const paginationElement = document.getElementById('pagination');
+
+                const totalPages = Math.ceil(data.length / itemsPerPage);
+                let currentPage = 1;
+
+                const displayPage = (page) => {
+                    galleryContainer.innerHTML = '';
+
+                    const start = (page - 1) * itemsPerPage;
+                    const end = start + itemsPerPage;
+
+                    for (let i = start; i < end && i < data.length; i++) {
+                        const item = data[i];
+                        const fullImage= `https://lh3.google.com/u/0/d/${item.fileid}`;
+                    const thumbnail= `https://drive.google.com/thumbnail?id=${item.fileid}&sz=w150`;
+                    item.src=fullImage;
+                    // Create HTML elements for each image and details
+                    const imageElement = document.createElement('img');
+                    imageElement.src =thumbnail;
+                        
+                        imageElement.alt = item.imageAlt;
+
+                        const detailsElement = document.createElement('div');
+                        detailsElement.innerHTML = `
+                        <p class="text-sm font-bold text-gray-500">Title : ${item.drawing_title}</p>
+            <p class="text-sm font-semibold">${item.name} | ${parseInt(item.age)} years old</p>
+
+            <p class="text-xs text-gray-500">Submitted on : ${item.datesubmitted}</p>
+            <p class="text-xs text-gray-500">School : ${item.school}</p>
+            <p class="text-xs text-gray-500">Class : ${item.classStd}</p>
+            <p class="text-xs text-gray-500">Location : ${item.area} | ${item.city}</p>
+            <p class="text-xs text-gray-500">Connected Centre : ${item.nearby_centre}</p>
+            
+
+                            
+                        `;
+
+                        const gridItem = document.createElement('div');
+                        gridItem.className = 'bg-white p-4 rounded shadow';
+                        gridItem.appendChild(imageElement);
+                        gridItem.addEventListener('click', () => openModal(i));
+                        gridItem.appendChild(detailsElement);
+                        
+                        galleryContainer.appendChild(gridItem);
+                    }
+                    updatePagination();
+
+                };
+                const updatePagination = () => {
+                    paginationElement.textContent = `${currentPage} / ${totalPages}`;
+                    prevButton.disabled = currentPage === 1;
+                    nextButton.disabled = currentPage === totalPages;
+                };
+
+
+                const createPaginationLinks = () => {
+                    for (let i = 1; i <= totalPages; i++) {
+                        const pageLink = document.createElement('a');
+                        pageLink.href = '#';
+                        pageLink.textContent = i;
+                        pageLink.className = 'mx-2 px-4 py-2 bg-blue-500 text-white rounded';
+                        pageLink.addEventListener('click', () => {
+                            currentPage = i;
+                            displayPage(currentPage);
+                        });
+
+                        //paginationElement.appendChild(pageLink);
+                    }
+                };
+                document.getElementById('closeModal').addEventListener('click', closeModal);
+
+                displayPage(1);
+                createPaginationLinks();
+
+                prevButton.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        displayPage(currentPage);
+                    }
+                });
+
+                nextButton.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        displayPage(currentPage);
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching data:', error));
+
+
+            function openModal(imageIndex) {
+                const images=imagesList
+                images[imageIndex].comments=[];
+                const item=images[imageIndex]
+      const modalContent = document.getElementById('modalContent');
+      modalContent.innerHTML = `
+      <p class="text-sm font-semibold">Group ${item.agegroup} | ${item.topic}</p>
+        <img src="${images[imageIndex].src}" class="mx-auto max-h-96" alt="Contest Image">
+        
+        <div class="image-details mt-4">
+
+            <p class="text-sm font-bold text-gray-500">Title : ${item.drawing_title}</p>
+            <p class="text-sm font-semibold">${item.name} | ${parseInt(item.age)} years old</p>
+
+            <p class="text-xs text-gray-500">Submitted on : ${item.datesubmitted}</p>
+            <p class="text-xs text-gray-500">School : ${item.school}</p>
+            <p class="text-xs text-gray-500">Class : ${item.classStd}</p>
+            <p class="text-xs text-gray-500">Location : ${item.area} | ${item.city}</p>
+            <p class="text-xs text-gray-500">Connected Centre : ${item.nearby_centre}</p>
+            
+                            
+
+        
+        </div>
+       
+      `;
+      document.getElementById('imageModal').classList.remove('hidden');
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      document.getElementById('imageModal').classList.add('hidden');
+    }
+
+    </script>
+
+</body>
+</html>
