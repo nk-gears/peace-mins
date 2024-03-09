@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sivanum - Naanum - Drawing Contest 2024</title>
+    <!-- Include Tailwind CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-blue-200 p-4">
+    <div class="max-w-md mx-auto bg-white rounded-md shadow-md">
+      <div class="max-w-md mx-auto bg-white rounded-md shadow-md">
+        <header class="flex justify-center items-center pt-2">
+          <div class="logo">
+            <img src="./sn-logo.jpg" class="mb-1 h-32 rounded-lg text-center" />
+          </div>
+        </header>
+
+        <h3 class="text-2xl font-bold text-blue-600 text-center pl-4">
+          Sivan Naanum 2024 - Centrewise Events Collection
+        </h3>
+      </div>
+      <form class="pl-4 pr-4" id="frmCentreRegister">
+        <div id="errorSummary" class="mb-1 text-red-500 p-2 rounded-md"></div>
+        <div class="mb-4 text-sm">
+          <p>
+            Please enter your centre emailId and Certificate Number to open your
+            'Sivanum Naanum' events Google Sheet.
+            <div class="text-red-500 text-sm"
+              >Note : <p>1. EmailId should end with @gmail.com or
+              @bkiivv.org.</p><p>2. Make sure you already logged in to that email.</p><p>3. If you have not allotted certificate number,
+              please use area pincode.</p>
+            </div>
+          </p>
+        </div>
+
+     
+        <div class="mb-4 mt-2">
+          <label
+            for="centreEmail"
+            class="block text-blue-600 font-semibold mb-1"
+            >Your Centre Email :</label
+          >
+          <input
+            type="text"
+            placeholder="should end with @gmail.com or @bkiiv.org"
+            id="centreEmail"
+            name="centreEmail"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          />
+        </div>
+
+        <div class="mb-4 mt-2">
+          <label for="cLocation" class="block text-blue-600 font-semibold mb-1"
+            >Your Centre Location :</label
+          >
+          <select
+            id="cLocation"
+            name="cLocation"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          ></select>
+        </div>
+
+
+        <div class="mb-4">
+          <label for="certNumber" class="block text-blue-600 font-semibold mb-1"
+            >Your Centre Certificate Number :</label
+          >
+          <input
+            type="number"
+            placeholder="Enter certificate Number"
+            id="certNumber"
+            name="certNumber"
+            class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+          />
+        </div>
+        <div class="flex items-center justify-end pb-4">
+          <button
+            type="submit"
+            id="btnSubmit"
+            class="bg-blue-500 pl-8 pr-8 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out"
+          >
+            Show Events Entry Sheet
+          </button>
+        </div>
+      </form>
+
+      <footer
+        class="bg-blue-800 text-white text-center p-1 md:p-1 lg:p-21 mt-20"
+      >
+        <div class="container mx-auto">
+          <!-- Your other footer content goes here -->
+
+          <div class="mt-4">
+            <p class="text-xs">
+              &copy; 2024 Brahma Kumaris - Chennai |
+              <a href="https://tamil.brahmakumaris.com">brahmakumaris.com</a>
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+          const APP_SCRIPT_URL =
+          "https://script.google.com/macros/s/AKfycbzTp2PH8MBY1WdyucFeGA_S_tVXkflfym21e4OrE6BLz8nY_OIEbt8ZzZEB4XCXrCBWfg/exec";
+
+
+
+
+      const populateDropdown = async (dropdownId, _data) => {
+          const dropdown = document.getElementById(dropdownId);
+          const data = [{ label: "---Select Centre---", value: "" }, ..._data];
+          if (data) {
+            data.forEach((option) => {
+              const optionElement = document.createElement("option");
+              optionElement.value = option.label;
+              optionElement.textContent = option.value;
+              dropdown.appendChild(optionElement);
+            });
+          }
+        };
+
+    
+        fetch(`${APP_SCRIPT_URL}?action=locations`,{method:"POST"})
+          .then((res) => res.json())
+          .then((data) => {
+            populateDropdown("cLocation", data.map(p=>({label:p.location,value:p.location})));
+          })
+          .catch((err) => console.log(err));
+
+
+      const form = document.getElementById("frmCentreRegister");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        document.getElementById("errorSummary").innerHTML = "";
+        const centreLocation = document.getElementById("cLocation").value.trim();
+        const centreEmail = document.getElementById("centreEmail").value.trim();
+        const certNumber = document.getElementById("certNumber").value.trim();
+        // Create an array to store error messages
+        const errors = [];
+
+        if (!centreLocation) {
+          errors.push("Centre Location cannot be empty");
+        }
+
+        if (!centreEmail) {
+          errors.push("Centre Email cannot be empty");
+        }
+
+
+        if (!(centreEmail.toLowerCase().endsWith('gmail.com') || centreEmail.toLowerCase().endsWith('bkivv.org'))) {
+          errors.push("This emailId not allowed");
+        }
+
+        if (!certNumber) {
+          errors.push("Certificate Number cannot be empty");
+        }
+
+        if (errors.length > 0) {
+          const errorSummary = document.getElementById("errorSummary");
+          errors.forEach(function (error) {
+            errorSummary.innerHTML += "<p>" + error + "</p>";
+          });
+          errorSummary.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+
+        const frmReg=document.getElementById('frmCentreRegister');
+          
+            const formData = new FormData(frmReg);
+           const formValues = Object.fromEntries(formData.entries());
+        const payload=JSON.stringify({formData:formValues});
+        document.getElementById("btnSubmit").innerHTML="Fetching your sheet...";
+        document.getElementById("btnSubmit").style.disabled=true;
+        fetch(`${APP_SCRIPT_URL}?action=centrelink`,{method:"POST",body:payload})
+          .then((res) => res.json())
+          .then((data) => {
+              //redirect the user to that page or show the link
+              //console.log(data);
+              window.location.href=data.sheetUrl
+          })
+          .catch((err) => console.log(err));
+
+
+      });
+    
+    </script>
+  </body>
+</html>

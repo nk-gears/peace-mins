@@ -10,6 +10,62 @@
 
     <div class="container mx-auto">
         <h1 class="text-4xl font-bold mb-8">Sivanum - Nanum : Drawing Contest 2024 - Submissions <span id="grpName"></span></h1>
+        <select
+        onchange="changeCentre(this)"
+        id="cCentres"
+        name="cCentres"
+        class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-blue-500 transition duration-300 ease-in-out"
+      >
+        </select>
+        <script>
+
+
+            const APP_SCRIPT_URL ="https://script.google.com/macros/s/AKfycbwnDx5nQDNM9bDrhTNrl_joeMtMyDtgCYj8xBojrF5MRdrVzhCL9gzltprc4iUALhR7/exec"; // <--- Please set the URL of Web Apps.
+            function changeCentre(objElement){
+                if(objElement.value=="-1")
+                imagesListFiltered=[...imagesList]
+            else
+                imagesListFiltered=[...imagesList.filter(f=>f.nearby_centre==objElement.value)];
+                renderListing(imagesListFiltered)
+            }
+            const selectedCentre='-1'
+            const populateDropdown = async (dropdownId, _data) => {
+   
+   const dropdown = document.getElementById(dropdownId);
+   const data=[{label:'---All Centres---',value:'-1'},..._data]
+   if (data) {
+     data.forEach((option) => {
+       const optionElement = document.createElement("option");
+       optionElement.value = option.value;
+       optionElement.textContent = option.label;
+       dropdown.appendChild(optionElement);
+     });
+   }
+   };
+   
+               
+   
+      
+        function populateCentres(){
+   
+           fetch(`${APP_SCRIPT_URL}?action=centres`, { method: "POST" })
+             .then((res) => res.json())
+             .then((data) => {
+               const formatted = data.map((p) => {
+                const nearByCentre=p.rowId + "-" + p.location
+                const itemCount=imagesList.filter(f=>f.nearby_centre==nearByCentre).length
+                    return {
+                 label: p.district + " > " + p.location + ` (${itemCount})`,
+                 value:nearByCentre };
+               });
+               //console.log(formatted);
+               populateDropdown("cCentres", formatted);
+               
+             }) // <--- You can retrieve the returned value here.
+             .catch((err) => console.log(err));
+        
+            }
+         </script>
         <div class="mt-8 flex justify-end items-end mb-2 " id="group-container">
             <a id="btnGroup1" href="/participants.html?cgroup=1" class="active:bg-violet-700 mx-2 px-2 py-2  text-blue-400 rounded">Group 1</a> <span class="mx-2 px-2 py-2 ">|</span> <a id="btnGroup2" href="/participants.html?cgroup=2" class="mx-2 px-2 py-2  text-blue-500 rounded">Group 2</a>
         </div>
@@ -42,6 +98,7 @@
     
     <script>
         let imagesList=[];
+        let imagesListFiltered=[];
         const _apiUrl = 'https://script.google.com/macros/s/AKfycbwnDx5nQDNM9bDrhTNrl_joeMtMyDtgCYj8xBojrF5MRdrVzhCL9gzltprc4iUALhR7/exec?cgroup=';
         const itemsPerPage = 10;
         const apiUrl=location.href.indexOf('cgroup=2')>=0?_apiUrl+'2':_apiUrl+'1';
@@ -52,17 +109,16 @@
             document.getElementById("grpName").innerHTML="- Group 1"
         }
         
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                imagesList=data;
+
+        function renderListing(resultset){
+               
                 const galleryContainer = document.getElementById('gallery-container');
                 const paginationContainer = document.getElementById('pagination-container');
                 const prevButton = document.getElementById('prev-btn');
                 const nextButton = document.getElementById('next-btn');
                 const paginationElement = document.getElementById('pagination');
 
-                const totalPages = Math.ceil(data.length / itemsPerPage);
+                const totalPages = Math.ceil(resultset.length / itemsPerPage);
                 let currentPage = 1;
 
                 const displayPage = (page) => {
@@ -71,8 +127,8 @@
                     const start = (page - 1) * itemsPerPage;
                     const end = start + itemsPerPage;
 
-                    for (let i = start; i < end && i < data.length; i++) {
-                        const item = data[i];
+                    for (let i = start; i < end && i < resultset.length; i++) {
+                        const item = resultset[i];
                         const fullImage= `https://lh3.google.com/u/0/d/${item.fileid}`;
                     const thumbnail= `https://drive.google.com/thumbnail?id=${item.fileid}&sz=w150`;
                     item.src=fullImage;
@@ -148,12 +204,23 @@
                         displayPage(currentPage);
                     }
                 });
+           
+           
+            }
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                imagesList=data;
+                imagesListFiltered=data;
+                renderListing(data);
+                populateCentres();
             })
             .catch(error => console.error('Error fetching data:', error));
 
 
             function openModal(imageIndex) {
-                const images=imagesList
+                const images=imagesListFiltered
                 images[imageIndex].comments=[];
                 const item=images[imageIndex]
       const modalContent = document.getElementById('modalContent');
